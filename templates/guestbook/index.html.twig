@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div>
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+
+    {% for postGuestbook in postsGuestbook %}
+        <div class="border">
+            <div> {{ postGuestbook.content|raw }}</div>
+            <div> {{ postGuestbook.author }}</div>
+            <div> {{ postGuestbook.postedAt|date("d/m/Y H:i:s") }}</div>
+        </div>
+    {% endfor %}
+{% endblock %}
