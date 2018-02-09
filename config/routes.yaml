@@ -7,5 +7,9 @@ news:
     defaults: { _controller: 'App\Controller\NewsController:indexAction' }
 
 guestbook:
-    path: /guestbook
-    defaults: { _controller: 'App\Controller\GuestbookController:indexAction' }
+    path: /guestbook/{page}
+    controller: App\Controller\GuestbookController:indexAction
+    defaults:
+            page: 1
+    requirements:
+            page: '\d+'

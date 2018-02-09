@@ -6,6 +6,7 @@
         "ext-iconv": "*",
         "egeloen/ckeditor-bundle": "^6.0",
         "fsi/ckeditor-bundle": "^7.0",
+        "symfony/asset": "^3.4",
         "symfony/console": "^3.4",
         "symfony/flex": "^1.0",
         "symfony/form": "^3.4",
@@ -16,7 +17,9 @@
         "symfony/profiler-pack": "^1.0",
         "symfony/twig-bundle": "^3.4",
         "symfony/validator": "^3.4",
-        "symfony/yaml": "^3.4"
+        "symfony/webpack-encore-pack": "^1.0",
+        "symfony/yaml": "^3.4",
+        "white-october/pagerfanta-bundle": "^1.1"
     },
     "require-dev": {
         "symfony/dotenv": "^3.4"

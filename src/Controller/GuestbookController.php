@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Guestbook;
+use App\Repository\GuestbookRepository;
 use Doctrine\ORM\Query\AST\GeneralCaseExpression;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -18,7 +21,7 @@ use Twig\Environment;
 
 class GuestbookController
 {
-    public function indexAction(Request $request, Environment $twig, RegistryInterface $doctrine, FormFactoryInterface $formFactory)
+    public function indexAction($page, GuestbookRepository $guestbookRepository, Request $request, Environment $twig, RegistryInterface $doctrine, FormFactoryInterface $formFactory)
     {
         $guestbook = new Guestbook();
 
@@ -46,11 +49,27 @@ class GuestbookController
                 ->getForm();
         }
 
-        $postsGuestbook = $doctrine->getRepository(Guestbook::class)->findBy([],['postedAt' => 'DESC']);
+
+        /**
+         * Pagination
+         */
+        $limit = 10;
+        if($page != 1) {
+            $pageSQL = $page;
+            $offset = $limit * ($page-1);
+        } else {
+            $pageSQL = 1;
+            $offset = 0;
+        }
+        $pagerfanta = $guestbookRepository->findLatest($page);
+
+        $postsGuestbook = $doctrine->getRepository(Guestbook::class)->findBy([],['postedAt' => 'DESC'], $limit, $offset);
+
 
         return new Response($twig->render('guestbook/index.html.twig', [
             'postsGuestbook' => $postsGuestbook,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'my_pager' => $pagerfanta
         ]));
     }
 

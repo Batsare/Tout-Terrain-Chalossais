@@ -4,7 +4,14 @@ namespace App\Repository;
 
 use App\Entity\Guestbook;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use InvalidArgumentException;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
+use Doctrine\ORM\Query;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Doctrine\ORM\EntityRepository;
 
 class GuestbookRepository extends ServiceEntityRepository
 {
@@ -25,4 +32,27 @@ class GuestbookRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getNb()
+    {
+        return $this->createQueryBuilder('l')
+            ->select('COUNT(l)')
+            ->getQuery()
+            ->getSingleResult();
+    }
+
+    public function findLatest(int $page = 1): Pagerfanta
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('SELECT a FROM App:Guestbook a ORDER BY a.id DESC')
+        ;
+        return $this->createPaginator($query, $page);
+    }
+    private function createPaginator(Query $query, int $page): Pagerfanta
+    {
+        $paginator = new Pagerfanta(new DoctrineORMAdapter($query));
+        $paginator->setMaxPerPage(10);
+        $paginator->setCurrentPage($page);
+        return $paginator;
+    }
 }
