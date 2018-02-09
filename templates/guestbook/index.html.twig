@@ -27,9 +27,14 @@
             </div>
         {% endfor %}
     </div>
-
-    <div class="pagerfanta">
-        {{ pagerfanta(my_pager, 'twitter_bootstrap3') }}
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <div class="pagerfanta">
+                {{ pagerfanta(my_pager, 'twitter_bootstrap4_translated') }}
+            </div>
+        </div>
+        <div class="col"></div>
     </div>
 
 {% endblock %}

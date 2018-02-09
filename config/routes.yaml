@@ -2,9 +2,23 @@ index:
     path: /
     defaults: { _controller: 'App\Controller\DefaultController::index' }
 
-news:
-    path: /news
-    defaults: { _controller: 'App\Controller\NewsController:indexAction' }
+
+post_home:
+    path: /post
+    controller: App\Controller\PostController:indexAction
+
+post_view:
+    path: /post/{id}
+    controller: App\Controller\PostController:viewAction
+    requirements:
+            page: '\d+'
+post_add:
+    path: /post/add
+    controller: App\Controller\PostController:addAction
+
+post_delete:
+    path: /post/delete
+    controller: App\Controller\PostController:deleteAction
 
 guestbook:
     path: /guestbook/{page}
