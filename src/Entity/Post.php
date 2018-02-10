@@ -46,7 +46,7 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="string", length=255)
+     * @ORM\Column(name="content", type="text")
      * @Assert\NotBlank()
      */
     private $content;
@@ -64,7 +64,7 @@ class Post
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category", cascade={"persist"})
-     * @ORM\JoinTable(name="oc_advert_category")
+     * @ORM\JoinTable(name="post_category")
      */
     private $categories;
 

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block title %}News {% endblock %}
+{% block h1 %}News {% endblock %}
+{% block body %}
+    <h1>Hello world !</h1>
+    <div class="row">
+    {% for post in postsNews %}
+        <div class="col-lg-4">
+            <div class="cuadro_intro_hover " >
+                <p style="text-align:center;">
+                    <img src="{{ post.image.url }}" class="img-responsive" alt="">
+                </p>
+                <div class="caption">
+                    <div class="blur"></div>
+                    <div class="caption-text">
+                        <h3 style="border-top:2px solid white; border-bottom:2px solid white; ">{{ post.title }}</h3>
+                        <p>{{ post.content }}</p>
+                        <a class=" btn btn-default" href="http://trovacamporella.com"><span class="glyphicon glyphicon-plus"> INFO</span></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    {% endfor %}
+    </div>
+{% endblock %}
