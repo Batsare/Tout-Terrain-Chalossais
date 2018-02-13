@@ -29,7 +29,8 @@ class PostType extends AbstractType
             ->add('date',      DateTimeType::class)
             ->add('title',     TextType::class)
             ->add('author',    TextType::class)
-            ->add('content',   CkeditorType::class)
+            ->add('content', CKEditorType::class, array(
+                'config' => array('toolbar' => 'full')))
             ->add('image',     ImageType::class)
             ->add('categories', EntityType::class, array(
                 'class'         => 'App:Category',

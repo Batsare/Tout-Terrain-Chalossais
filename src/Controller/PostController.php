@@ -5,6 +5,7 @@ use App\Entity\Post;
 use App\Type\PostType;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\RedirectController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,7 +19,7 @@ class PostController
 {
     public function indexAction(Environment $twig,RegistryInterface $doctrine)
     {
-        $postsNews = $doctrine->getRepository(Post::class)->findAll();
+        $postsNews = $doctrine->getRepository(Post::class)->findBy([],['id' => 'DESC']);
 
 
         return new Response($twig->render('post/index.html.twig', [
@@ -35,7 +36,7 @@ class PostController
         ]));
     }
 
-    public function addAction(FormFactoryInterface $formFactory, Environment $twig, RegistryInterface $doctrine, Request $request)
+    public function addAction(RedirectController $redirectController, FormFactoryInterface $formFactory, Environment $twig, RegistryInterface $doctrine, Request $request)
     {
         $post = New Post();
 
@@ -46,6 +47,12 @@ class PostController
         if ($form->isSubmitted() && $form->isValid()) {
             $doctrine->getEntityManager()->persist($post);
             $doctrine->getEntityManager()->flush();
+
+
+
+            // On redirige vers la page de visualisation de l'annonce nouvellement créée
+
+            return $redirectController->redirectAction($request, 'post_home');
         }
         return new Response($twig->render('post/add.html.twig',[
             'form' => $form->createView()
