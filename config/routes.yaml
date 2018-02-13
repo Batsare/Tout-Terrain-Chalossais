@@ -8,7 +8,7 @@ post_home:
     controller: App\Controller\PostController:indexAction
 
 post_view:
-    path: /post/{id}
+    path: /post/view/{id}
     controller: App\Controller\PostController:viewAction
     requirements:
             page: '\d+'

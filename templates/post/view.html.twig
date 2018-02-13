@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block title %}News {% endblock %}
+{% block h1 %}News{% endblock %}
+{% block body %}
+    <h2>{{ postsNews.title }}</h2>
+    <div class="row">
+            <img src="{{ postsNews.image.webPath }}" class="img-fluid" alt="{{ postsNews.image.alt }}"></div>
+    <div class="row">
+
+            <div>
+                <p>
+                    {{ postsNews.content |raw }}
+                </p>
+            </div>
+    </div>
+{% endblock %}

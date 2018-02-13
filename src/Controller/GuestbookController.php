@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Guestbook;
+use App\Type\GuestbookType;
 use App\Repository\GuestbookRepository;
 use Doctrine\ORM\Query\AST\GeneralCaseExpression;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
@@ -25,12 +26,7 @@ class GuestbookController
     {
         $guestbook = new Guestbook();
 
-        $form = $formFactory->createBuilder(FormType::class, $guestbook)
-            ->add('author', TextType::class)
-            ->add('content', CKEditorType::class, array(
-                'config' => array('toolbar' => 'full')))
-            ->add('save', SubmitType::class)
-            ->getForm();
+        $form = $formFactory->create(GuestbookType::class, $guestbook);
 
         $form->handleRequest($request);
 
