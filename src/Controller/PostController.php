@@ -19,7 +19,7 @@ class PostController
 {
     public function indexAction(Environment $twig,RegistryInterface $doctrine)
     {
-        $postsNews = $doctrine->getRepository(Post::class)->findBy([],['id' => 'DESC']);
+        $postsNews = $doctrine->getRepository(Post::class)->findBy([],['id' => 'DESC'], 4, 1);
 
 
         return new Response($twig->render('post/index.html.twig', [
