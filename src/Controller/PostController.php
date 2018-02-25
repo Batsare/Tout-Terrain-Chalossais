@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Repository\PostRepository;
 use App\Type\PostType;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -19,7 +20,7 @@ class PostController
 {
     public function indexAction(Environment $twig,RegistryInterface $doctrine)
     {
-        $postsNews = $doctrine->getRepository(Post::class)->findBy([],['id' => 'DESC'], 4, 1);
+        $postsNews = $doctrine->getRepository(Post::class)->findBy([],['id' => 'DESC'], 4, 0);
 
 
         return new Response($twig->render('post/index.html.twig', [
@@ -36,7 +37,7 @@ class PostController
         ]));
     }
 
-    public function addAction(RedirectController $redirectController, FormFactoryInterface $formFactory, Environment $twig, RegistryInterface $doctrine, Request $request)
+    public function addAction(PostRepository $postRepository, RedirectController $redirectController, FormFactoryInterface $formFactory, Environment $twig, RegistryInterface $doctrine, Request $request)
     {
         $post = New Post();
 
@@ -47,6 +48,8 @@ class PostController
         if ($form->isSubmitted() && $form->isValid()) {
             $doctrine->getEntityManager()->persist($post);
             $doctrine->getEntityManager()->flush();
+
+            $postRepository->lastPostForArchive();
 
 
 
@@ -59,10 +62,14 @@ class PostController
         ]));
     }
 
-    public function deleteAction()
+    public function deleteAction($id, PostRepository $postRepository, RedirectController $redirectController, Request $request)
     {
-
+        $postRepository->deleteById($id);
+        return $redirectController->redirectAction($request, 'post_home');
     }
 
+    public function archiveAction(){
+
+    }
 
 }

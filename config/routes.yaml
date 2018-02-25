@@ -17,8 +17,14 @@ post_add:
     controller: App\Controller\PostController:addAction
 
 post_delete:
-    path: /post/delete
+    path: /post/delete/{id}
     controller: App\Controller\PostController:deleteAction
+    requirements:
+                page: '\d+'
+
+post_archive:
+    path: /post/archive
+    controller: App\Controller\PostController:archiveAction
 
 guestbook:
     path: /guestbook/{page}

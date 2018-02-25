@@ -12,6 +12,11 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 class Post
 {
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -55,6 +60,28 @@ class Post
      * @ORM\Column(name="published", type="boolean")
      */
     private $published = true;
+
+    /**
+     * @ORM\Column(name="archived", type="boolean")
+     */
+    private $archived = false;
+
+    /**
+     * @return mixed
+     */
+    public function getArchived()
+    {
+        return $this->archived;
+    }
+
+    /**
+     * @param mixed $archived
+     */
+    public function setArchived($archived)
+    {
+        $this->archived = $archived;
+    }
+
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})

@@ -25,4 +25,29 @@ class PostRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function lastPostForArchive(){
+        $lastPost = $this->findBy([], ['id' => 'DESC'],1, 4);
+
+        $this->createQueryBuilder('c')
+            ->update('App:Post', 'p')
+            ->set('p.archived','true')
+            ->where('p.id = ?1')
+            ->setParameter('1', $lastPost)
+            ->getQuery()
+            ->execute();
+        return;
+
+    }
+
+    public function deleteById($id){
+        $this->createQueryBuilder('c')
+            ->delete('App:Post', 'p')
+            ->where('p.id = ?1')
+            ->setParameter('1', $id)
+            ->getQuery()
+            ->execute();
+
+        return;
+    }
 }
