@@ -33,3 +33,6 @@ guestbook:
             page: 1
     requirements:
             page: '\d+'
+
+elfinder:
+     resource: "@FMElfinderBundle/Resources/config/routing.yml"

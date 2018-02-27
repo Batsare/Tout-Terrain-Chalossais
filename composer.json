@@ -4,7 +4,6 @@
     "require": {
         "php": "^7.0.8",
         "ext-iconv": "*",
-        "egeleon/ckeditor-bundle": "^6.0",
         "fsi/ckeditor-bundle": "^7.0",
         "symfony/asset": "^3.4",
         "symfony/console": "^3.4",
@@ -19,7 +18,8 @@
         "symfony/validator": "^3.4",
         "symfony/webpack-encore-pack": "^1.0",
         "symfony/yaml": "^3.4",
-        "white-october/pagerfanta-bundle": "^1.1"
+        "white-october/pagerfanta-bundle": "^1.1",
+        "helios-ag/fm-elfinder-bundle": "~6"
     },
     "require-dev": {
         "symfony/dotenv": "^3.4"
@@ -28,7 +28,8 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "component-dir": "public/bundles"
     },
     "autoload": {
         "psr-4": {

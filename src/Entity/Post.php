@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 class Post
 {
+
     public function __construct()
     {
         $this->date = new \DateTime();
@@ -99,6 +100,7 @@ class Post
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
+
 
     /**
      * @return mixed
