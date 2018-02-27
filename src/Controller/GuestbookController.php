@@ -6,7 +6,7 @@ use App\Entity\Guestbook;
 use App\Type\GuestbookType;
 use App\Repository\GuestbookRepository;
 use Doctrine\ORM\Query\AST\GeneralCaseExpression;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use KMS\FroalaEditorBundle\Form\Type\FroalaEditorType;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -39,8 +39,7 @@ class GuestbookController
             $guestbook = new Guestbook();
             $form = $formFactory->createBuilder(FormType::class, $guestbook)
                 ->add('author', TextType::class)
-                ->add('content', CKEditorType::class, array(
-                    'config' => array('toolbar' => 'full')))
+                ->add('content', FroalaEditorType::class)
                 ->add('save', SubmitType::class)
                 ->getForm();
         }

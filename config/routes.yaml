@@ -33,3 +33,7 @@ guestbook:
             page: 1
     requirements:
             page: '\d+'
+
+kms_froala_editor:
+  resource: "@KMSFroalaEditorBundle/Resources/config/routing.yml"
+  prefix:   /froalaeditor

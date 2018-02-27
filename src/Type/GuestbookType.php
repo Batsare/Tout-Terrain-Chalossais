@@ -2,8 +2,8 @@
 
 namespace App\Type;
 
-use App\Repository\CategoryRepository;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use App\Repository\CategoryRepository;;
+use KMS\FroalaEditorBundle\Form\Type\FroalaEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -25,8 +25,7 @@ class GuestbookType extends AbstractType
 
         $builder
             ->add('author', TextType::class)
-            ->add('content', CKEditorType::class, array(
-                'config' => array('toolbar' => 'full')))
+            ->add('content', FroalaEditorType::class)
             ->add('save', SubmitType::class)
         ;
     }
