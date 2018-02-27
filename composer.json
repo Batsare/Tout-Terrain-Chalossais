@@ -4,7 +4,6 @@
     "require": {
         "php": "^7.0.8",
         "ext-iconv": "*",
-        "fsi/ckeditor-bundle": "^7.0",
         "symfony/asset": "^3.4",
         "symfony/console": "^3.4",
         "symfony/flex": "^1.0",
