@@ -4,13 +4,15 @@
 {% block body %}
     <h2>{{ postsNews.title }}</h2>
     <div class="row">
-            <img src="{{ postsNews.image.webPath }}" class="img-fluid" alt="{{ postsNews.image.alt }}"></div>
-    <div class="row">
-
-            <div>
-                <p>
-                    {{ postsNews.content |raw }}
-                </p>
-            </div>
+        <div class="fr-view col-md-10">
+            {{ postsNews.content |raw }}
+        </div>
     </div>
+
+    <div id="myModal" class="modal" role="dialog">
+        <span class="close">&times;</span>
+        <a id="lien_image_article" href=""><img class="img-responsive modal-content" src="" /></a>
+
+    </div>
+
 {% endblock %}

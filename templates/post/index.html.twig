@@ -2,17 +2,10 @@
 {% block title %}News {% endblock %}
 {% block h1 %}News {% endblock %}
 {% block body %}
-    {% set i = 0 %}
-    <h1>Hello world !</h1>
-    <div class="row" style="margin-bottom: 10px">
-    {% for post in postsNews %}
-        {% if i == 2 %}
-            </div>
-            <div class="row" style="margin-bottom: 10px">
-            {% set i = 0 %}
+    <div class="row" >
 
-        {% endif %}
-        <div class="col-lg-6">
+    {% for post in postsNews %}
+        <div class="col-xl-6 " style="margin-bottom: 10px">
             <a id="link_news" href="post/view/{{ post.id }}">
             <div class="cuadro_intro_hover " >
                 <p style="text-align:center;">
@@ -22,14 +15,12 @@
                     <div class="blur"></div>
                     <div class="caption-text">
                         <h3 style="border-top:2px solid white; border-bottom:2px solid white; ">{{ post.title }}</h3>
-                        <p>{{ post.content | raw}}</p>
+                        <p>{{ post.content | raw | striptags("img")}}</p>
                     </div>
                 </div>
             </div>
             </a>
         </div>
-
-        {% set i = i + 1 %}
     {% endfor %}
     </div>
 {% endblock %}

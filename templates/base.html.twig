@@ -6,9 +6,10 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
             <link rel="stylesheet" href={{ asset("build/css/app.css") }}>
+            <link rel="stylesheet" href={{ asset("bundles/kmsfroalaeditor/froala_editor_2.7.5/css/froala_style.min.css") }}>
         {% endblock %}
     </head>
-    <body class="container-fluid col-md-8 col-xl-12 offset-xl-1 offset-md-2">
+    <body class="container-fluid col-md-8 col-xl-8 offset-xl-2 offset-md-2">
         <h1>{% block h1 %}{% endblock %}- Tout Terrain Chalossais </h1>
         {% block body %}{% endblock %}
         {% block javascripts %}
