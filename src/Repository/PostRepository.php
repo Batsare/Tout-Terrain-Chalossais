@@ -26,12 +26,25 @@ class PostRepository extends ServiceEntityRepository
     }
     */
 
+    public function postPublished(){
+        return $this->createQueryBuilder('c')
+            ->where('c.published = ?1')
+            ->andWhere('c.archived = ?2')
+            ->orderBy('c.id','DESC')
+            ->setParameter('1', true)
+            ->setParameter('2', false)
+            ->getQuery()
+            ->execute();
+
+    }
+
     public function lastPostForArchive(){
         $lastPost = $this->findBy([], ['id' => 'DESC'],1, 4);
 
         $this->createQueryBuilder('c')
             ->update('App:Post', 'p')
             ->set('p.archived','true')
+            ->set('p.published','false')
             ->where('p.id = ?1')
             ->setParameter('1', $lastPost)
             ->getQuery()

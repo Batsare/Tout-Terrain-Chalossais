@@ -4,13 +4,8 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Repository\PostRepository;
 use App\Type\PostType;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\RedirectController;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormFactoryBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +13,10 @@ use Twig\Environment;
 
 class PostController
 {
-    public function indexAction(Environment $twig,RegistryInterface $doctrine)
+    public function indexAction(Environment $twig,RegistryInterface $doctrine,PostRepository $postRepository)
     {
         $postsNews = $doctrine->getRepository(Post::class)->findBy([],['id' => 'DESC'], 4, 0);
-
+        $postsNews = $postRepository->postPublished();
 
         return new Response($twig->render('post/index.html.twig', [
             'postsNews' => $postsNews

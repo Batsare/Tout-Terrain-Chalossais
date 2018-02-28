@@ -39,7 +39,8 @@ class PostType extends AbstractType
                 }
             ))
             ->add('published', CheckboxType::class, array(
-                'label' => 'Publier'))
+                'label' => 'Publier',
+                'required' => false))
             ->add('save',      SubmitType::class, array(
                 'label' => 'Envoyer'
             ))
