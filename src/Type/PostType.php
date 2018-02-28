@@ -4,7 +4,7 @@ namespace App\Type;
 
 use App\Type\ImageType;
 use App\Repository\CategoryRepository;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use KMS\FroalaEditorBundle\Form\Type\FroalaEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -28,8 +28,11 @@ class PostType extends AbstractType
             ->add('date',      DateTimeType::class)
             ->add('title',     TextType::class)
             ->add('author',    TextType::class)
-            ->add('content', CKEditorType::class, array(
-                'config' => array('toolbar' => 'full')))
+            ->add('content', FroalaEditorType::class, array(
+                "language" => "fr",
+                "tableColors" => [ "#FFFFFF", "#FF0000" ],
+                "saveParams" => [ "id" => "myEditorField" ]
+            ))
             ->add('image',     ImageType::class)
             ->add('categories', EntityType::class, array(
                 'class'         => 'App:Category',

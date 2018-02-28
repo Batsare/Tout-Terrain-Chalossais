@@ -2,7 +2,7 @@
 
 namespace App\Type;
 
-use App\Repository\CategoryRepository;;
+use App\Repository\CategoryRepository;
 use KMS\FroalaEditorBundle\Form\Type\FroalaEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;

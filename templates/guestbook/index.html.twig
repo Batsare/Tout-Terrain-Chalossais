@@ -22,7 +22,7 @@
             <div id="post_guestbook" class="card">
                 <div class="card-body">
                     <div id="auhtor_guestbook" class="font-weight-bold"> {{ postGuestbook.author }}</div>
-                    <div id="content_guestbook"> {{ postGuestbook.content|raw }}</div>
+                    <div id="content_guestbook"> {{ postGuestbook.content | raw }}</div>
                     <div id="date_guestbook" class="border-top"> {{ postGuestbook.postedAt|date("d/m/Y H:i:s") }}</div>
                 </div>
             </div>
