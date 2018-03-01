@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
-{% block title %}News {% endblock %}
-{% block h1 %}News {% endblock %}
+{% block title %}Articles récents {% endblock %}
+{% block h1 %}Articles récents {% endblock %}
 {% block body %}
+    <h2>Les quatres derniers articles</h2>
+    <hr>
     <div class="row" >
 
     {% for post in postsNews %}

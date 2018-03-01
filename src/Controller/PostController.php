@@ -57,10 +57,18 @@ class PostController
         ]));
     }
 
-    public function deleteAction($id, PostRepository $postRepository, RedirectController $redirectController, Request $request)
+    public function deleteAction(Post $post,RegistryInterface $doctrine,FormFactoryInterface $formFactory, $id, PostRepository $postRepository, RedirectController $redirectController, Request $request)
     {
-        $postRepository->deleteById($id);
-        return $redirectController->redirectAction($request, 'post_home');
+        $em = $doctrine->getManager();
+        // On crée un formulaire vide, qui ne contiendra que le champ CSRF
+        // Cela permet de protéger la suppression d'annonce contre cette faille
+        $form = $formFactory->create();
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em->remove($post);
+            $em->flush();
+            //$request->getSession()->getFlashBag()->add('info', "L'annonce a bien été supprimée.");
+            return $redirectController->redirectAction($request, 'post_home');
+        }
     }
 
     public function archiveAction(){
