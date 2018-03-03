@@ -5,17 +5,19 @@ use App\Entity\Post;
 use App\Repository\PostRepository;
 use App\Type\PostType;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\RedirectController;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class PostController
+class PostController extends Controller
 {
-    public function indexAction(Environment $twig,RegistryInterface $doctrine,PostRepository $postRepository)
+    public function indexAction(Environment $twig,PostRepository $postRepository)
     {
-        $postsNews = $doctrine->getRepository(Post::class)->findBy([],['id' => 'DESC'], 4, 0);
+        //$postsNews = $doctrine->getRepository(Post::class)->findBy([],['id' => 'DESC'], 4, 0);
         $postsNews = $postRepository->postPublished();
 
         return new Response($twig->render('post/index.html.twig', [
@@ -23,12 +25,11 @@ class PostController
         ]));
     }
 
-    public function viewAction($id, Environment $twig, RegistryInterface $doctrine)
+    public function viewAction(Post $post, Environment $twig)
     {
-        $post = $doctrine->getRepository(Post::class)->find($id);
 
         return new Response($twig->render('post/view.html.twig', [
-            'postsNews' => $post
+            'post' => $post
         ]));
     }
 
@@ -57,22 +58,56 @@ class PostController
         ]));
     }
 
-    public function deleteAction(Post $post,RegistryInterface $doctrine,FormFactoryInterface $formFactory, $id, PostRepository $postRepository, RedirectController $redirectController, Request $request)
+    public function editAction(Post $post, Request $request,Environment $twig, FormFactoryInterface $formFactory, RegistryInterface $registry)
+    {
+        $form = $formFactory->create(PostType::class, $post);
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            // Inutile de persister ici, Doctrine connait déjà notre annonce
+
+            $registry->getEntityManager()->flush();
+
+            //$request->getSession()->getFlashBag()->add('notice', 'Annonce bien modifiée.');
+
+            //return $redirectResponse->redirectToRoute('post_view', array('id' => $post->getId()));
+            return $this->redirectToRoute('post_view',array('id'=> $post->getId()));
+
+        }
+        return $this->render('post/edit.html.twig', array(
+            'post' => $post,
+            'form'   => $form->createView(),
+        ));
+    }
+
+
+    public function deleteAction(Post $post,RegistryInterface $doctrine,FormFactoryInterface $formFactory, Environment $twig, RedirectController $redirectController, Request $request)
     {
         $em = $doctrine->getManager();
         // On crée un formulaire vide, qui ne contiendra que le champ CSRF
         // Cela permet de protéger la suppression d'annonce contre cette faille
         $form = $formFactory->create();
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+        if ($request->isMethod('POST')) {
             $em->remove($post);
             $em->flush();
             //$request->getSession()->getFlashBag()->add('info', "L'annonce a bien été supprimée.");
             return $redirectController->redirectAction($request, 'post_home');
         }
+        return new Response($twig->render('post/delete.html.twig', array(
+            'post' => $post,
+            'form'   => $form->createView(),
+        )));
     }
 
     public function archiveAction(){
 
     }
+
+    /**
+     * @ParamConverter("json")
+     */
+    public function ParamConverterAction($json)
+    {
+        return new Response(print_r($json, true));
+    }
+
 
 }

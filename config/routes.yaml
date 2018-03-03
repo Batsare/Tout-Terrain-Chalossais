@@ -16,6 +16,12 @@ post_add:
     path: /post/add
     controller: App\Controller\PostController:addAction
 
+post_edit:
+    path: /post/edit/{id}
+    controller: App\Controller\PostController:editAction
+    requirements:
+                page: '\d+'
+
 post_delete:
     path: /post/delete/{id}
     controller: App\Controller\PostController:deleteAction
@@ -37,3 +43,8 @@ guestbook:
 kms_froala_editor:
   resource: "@KMSFroalaEditorBundle/Resources/config/routing.yml"
   prefix:   /froalaeditor
+
+app_paramconverter:
+    path: /test/{json}
+    defaults:
+      _controller: "App:Post:ParamConverter"
