@@ -4,8 +4,12 @@ index:
 
 
 post_home:
-    path: /post
+    path: /post/{page}
     controller: App\Controller\PostController:indexAction
+    defaults:
+            page: 1
+    requirements:
+            page: '\d+'
 
 post_view:
     path: /post/view/{id}

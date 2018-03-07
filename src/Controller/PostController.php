@@ -15,13 +15,31 @@ use Twig\Environment;
 
 class PostController extends Controller
 {
-    public function indexAction(Environment $twig,PostRepository $postRepository)
+    public function indexAction(Environment $twig, PostRepository $postRepository, $page)
     {
         //$postsNews = $doctrine->getRepository(Post::class)->findBy([],['id' => 'DESC'], 4, 0);
-        $postsNews = $postRepository->postPublished();
+        //$postsNews = $postRepository->postPublished();
+
+        /**
+         * Pagination
+         */
+        $limit = 4;
+        if($page != 1) {
+            $pageSQL = $page;
+            $offset = $limit * ($page-1);
+        } else {
+            $pageSQL = 1;
+            $offset = 0;
+        }
+        $pagerfanta = $postRepository->findLatest($page);
+
+        $postsNews = $postRepository->findBy([],['date' => 'DESC'], $limit, $offset);
+
+
 
         return new Response($twig->render('post/index.html.twig', [
-            'postsNews' => $postsNews
+            'postsNews' => $postsNews,
+            'my_pager' => $pagerfanta
         ]));
     }
 

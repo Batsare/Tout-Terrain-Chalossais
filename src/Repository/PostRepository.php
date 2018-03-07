@@ -4,6 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class PostRepository extends ServiceEntityRepository
@@ -62,5 +65,20 @@ class PostRepository extends ServiceEntityRepository
             ->execute();
 
         return;
+    }
+
+    public function findLatest(int $page = 1): Pagerfanta
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('SELECT a FROM App:Post a ORDER BY a.id DESC')
+        ;
+        return $this->createPaginator($query, $page);
+    }
+    private function createPaginator(Query $query, int $page): Pagerfanta
+    {
+        $paginator = new Pagerfanta(new DoctrineORMAdapter($query));
+        $paginator->setMaxPerPage(4);
+        $paginator->setCurrentPage($page);
+        return $paginator;
     }
 }

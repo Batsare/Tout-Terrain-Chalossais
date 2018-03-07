@@ -1,28 +1,35 @@
 {% extends 'base.html.twig' %}
 {% block title %}Articles récents {% endblock %}
 {% block h1 %}Articles récents {% endblock %}
-{% block body %}
-    <h2>Les quatres derniers articles</h2>
-    <hr>
-    <div class="row" >
+{% block container %}
+    <div class="" >
 
     {% for post in postsNews %}
-        <div class="col-xl-6 " style="margin-bottom: 10px">
-            <a id="link_news" href="post/view/{{ post.id }}">
-            <div class="cuadro_intro_hover " >
-                <p style="text-align:center;">
-                    <img src="{{ post.image.webPath }}" class="img-responsive" alt="">
-                </p>
-                <div class="caption">
-                    <div class="blur"></div>
-                    <div class="caption-text">
-                        <h3 style="border-top:2px solid white; border-bottom:2px solid white; ">{{ post.title }}</h3>
-                        <p>{{ post.content | raw | striptags("img")}}</p>
-                    </div>
+        <div class="pb-md-4">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <p class="h2"><a class="text-success" href="{{ path('post_view', {'id': post.id}) }}">{{ post.title }}</a></p>
+                    <hr>
                 </div>
             </div>
-            </a>
+            <div class="row justify-content-md-center">
+                <div class="col-md-4">
+                    <img src="{{ post.image.webPath }}" class="img-thumbnail img-fluid" alt="">
+                </div>
+                <div class="col-md-6 pt-md-4">
+                    <p>{{ post.content | raw | striptags("img") | slice(0, 500) }}... <a href="{{ path('post_view', {'id': post.id}) }}">Lire plus</a></p>
+                </div>
+            </div>
         </div>
     {% endfor %}
+        <div class="row justify-content-md-center">
+            <div class="">
+                <div class="pagerfanta">
+                    {{ pagerfanta(my_pager, 'twitter_bootstrap4_translated') }}
+                </div>
+            </div>
+        </div>
+
     </div>
+
 {% endblock %}

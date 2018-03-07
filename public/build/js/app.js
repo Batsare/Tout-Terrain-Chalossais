@@ -32,11 +32,33 @@ $(document).ready(function () {
         });
     });
 
-    var span = document.getElementsByClassName("close")[0];
+    if(document.getElementsByClassName("close")[0]){
+        var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        $('#myModal').css("display", "none");
+        span.onclick = function() {
+            $('#myModal').css("display", "none");
+        };
+        $('#myModal').click(function(){
+            $('#myModal').css("display", "none");
+        });
     }
+
+
+
+    /*
+    $(window).scroll(function () {
+
+        console.log($(window).scrollTop());
+
+        if ($(window).scrollTop() > 70) {
+            $('#nav_bar').addClass('fixed-top');
+        }
+
+        if ($(window).scrollTop() < 71) {
+            $('#nav_bar').removeClass('fixed-top');
+        }
+    });
+     */
 });
 

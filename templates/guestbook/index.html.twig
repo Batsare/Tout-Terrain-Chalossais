@@ -1,41 +1,47 @@
 {% extends 'base.html.twig' %}
 {% block title %}Livre d'or {% endblock %}
-{% block h1 %}Livre d'or {% endblock %}
-{% block body %}
+{% block container %}
 
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label id="messages_guestbook" class="btn btn-outline-secondary active">
-            <input type="radio" name="options"  autocomplete="off" checked> Messages
-        </label>
-        <label id="post_message_guestbook" class="btn btn-outline-secondary">
-            <input type="radio" name="options"  autocomplete="off"> Poster un message
-        </label>
+<div class="row justify-content-md-center">
+    <div class="">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label id="messages_guestbook" class="btn btn-outline-secondary active">
+                <input type="radio" name="options"  autocomplete="off" checked> Messages
+            </label>
+            <label id="post_message_guestbook" class="btn btn-outline-secondary">
+                <input type="radio" name="options"  autocomplete="off"> Poster un message
+            </label>
+        </div>
     </div>
-    <div id="form_guestbook" class="disabled">
-        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
-    </div>
+</div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-10 ">
 
-    <div id="posts_guestbook" class="enabled">
-        {% for postGuestbook in postsGuestbook %}
-            <div id="post_guestbook" class="card">
-                <div class="card-body">
-                    <div id="auhtor_guestbook" class="font-weight-bold"> {{ postGuestbook.author }}</div>
-                    <div id="content_guestbook"> {{ postGuestbook.content | raw }}</div>
-                    <div id="date_guestbook" class="border-top"> {{ postGuestbook.postedAt|date("d/m/Y H:i:s") }}</div>
-                </div>
+            <div id="form_guestbook" class="disabled">
+                {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
             </div>
-        {% endfor %}
+
+            <div id="posts_guestbook" class="enabled">
+                {% for postGuestbook in postsGuestbook %}
+                    <div id="post_guestbook" class="card">
+                        <div class="card-body">
+                            <div id="auhtor_guestbook" class="font-weight-bold"> {{ postGuestbook.author }}</div>
+                            <div id="content_guestbook"> {{ postGuestbook.content | raw }}</div>
+                            <div id="date_guestbook" class="border-top"> {{ postGuestbook.postedAt|date("d/m/Y H:i:s") }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    <div class="row">
-        <div class="col"></div>
-        <div class="col">
+    <div class="row justify-content-md-center">
+        <div class="">
             <div class="pagerfanta">
                 {{ pagerfanta(my_pager, 'twitter_bootstrap4_translated') }}
             </div>
         </div>
-        <div class="col"></div>
     </div>
 
 {% endblock %}

@@ -1,9 +1,27 @@
 {% extends 'base.html.twig' %}
 {% block title %}News {% endblock %}
-{% block h1 %}News{% endblock %}
-{% block body %}
-    <h2>{{ post.title }}</h2>
-    <div class="row">
+{% block container %}
+    <div class="row justify-content-end">
+        <div class="col">
+            <p>
+                <a href="{{ path('post_home') }}" class="btn btn-default">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                    Retour à la liste
+                </a>
+                <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn btn-default">
+                    <i class="glyphicon glyphicon-edit"></i>
+                    Modifier l'annonce
+                </a>
+                <a href="{{ path('post_delete', {'id': post.id}) }}" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    Supprimer l'annonce
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <h2>{{ post.title }}</h2>
         <div class="fr-view col-md-10">
             {{ post.content |raw }}
         </div>
@@ -14,20 +32,5 @@
         <a id="lien_image_article" href=""><img class="img-responsive modal-content" src="" /></a>
 
     </div>
-
-    <p>
-        <a href="{{ path('post_home') }}" class="btn btn-default">
-            <i class="glyphicon glyphicon-chevron-left"></i>
-            Retour à la liste
-        </a>
-        <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn btn-default">
-            <i class="glyphicon glyphicon-edit"></i>
-            Modifier l'annonce
-        </a>
-        <a href="{{ path('post_delete', {'id': post.id}) }}" class="btn btn-danger">
-            <i class="glyphicon glyphicon-trash"></i>
-            Supprimer l'annonce
-        </a>
-    </p>
 
 {% endblock %}

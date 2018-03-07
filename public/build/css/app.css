@@ -109,9 +109,9 @@ text-decoration: none;
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 50px; /* Location of the box */
+    padding-top: 10px; /* Location of the box */
     left: 0;
-    top: 0;
+    top: 50px;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
@@ -123,7 +123,7 @@ text-decoration: none;
 .modal-content {
     margin: auto;
     display: block;
-    width: 80%;
+    width: 50%;
     max-width: 800px;
 }
 
@@ -177,4 +177,20 @@ text-decoration: none;
 
 .fr-view img:hover{
     cursor:pointer;
+}
+
+/* Container TTC */
+.container-ttc{
+    box-shadow: 0 9px 0px 0px white,
+                0 -9px 0px 0px white,
+                12px 0 15px -4px rgba(0, 0, 0, 0.8),
+                -12px 0 15px -4px rgba(0, 0, 0, 0.8);
+    background: white;
+    margin-top: 250px;
+}
+
+body{
+    background: url("../img/header.jpg") no-repeat;
+    background-size: 100% auto;
+    //padding-top: 250px;
 }
