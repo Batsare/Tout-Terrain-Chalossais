@@ -2,7 +2,7 @@
 {% block title %}News {% endblock %}
 {% block container %}
 
-    <div class="row justify-content-start ml-4">
+    <div class="row justify-content-end mr-4">
         <div class="col-xl-6">
             <p>
                 <a href="{{ path('article_home') }}" class="btn btn-outline-success">
@@ -20,10 +20,17 @@
             </p>
         </div>
     </div>
-
-    <div class="row justify-content-end mr-5 ">
-        <div class="h1 rounded bg-success text-white pl-2 pr-2">{{ article.title }}</div>
+    <div class="row justify-content-md-start offset-1">
+        <div class="thumbnail text-center">
+            <img src="{{ article.image.webPath }}" alt="" class="img-responsive">
+            <div class="caption">
+                <div class="col-xl-4 rounded-right bg-success">
+                    <p class="h1">{{ article.title }}</p>
+                </div>
+            </div>
+        </div>
     </div>
+
 
     <div class="row justify-content-md-center">
         <div class="col-xl-10">

@@ -194,3 +194,14 @@ body{
     background-size: 100% auto;
     //padding-top: 250px;
 }
+
+.thumbnail {
+    position: relative;
+}
+
+.caption {
+    position: absolute;
+    top: 80%;
+    left: 0;
+    width: 100%;
+}
