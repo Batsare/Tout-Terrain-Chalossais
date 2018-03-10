@@ -10,6 +10,7 @@ use KMS\FroalaEditorBundle\Form\Type\FroalaEditorType;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -20,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class GuestbookController
+class GuestbookController extends Controller
 {
     public function indexAction($page, GuestbookRepository $guestbookRepository, Request $request, Environment $twig, RegistryInterface $doctrine, FormFactoryInterface $formFactory)
     {
@@ -68,5 +69,17 @@ class GuestbookController
         ]));
     }
 
+    public function widgetAction($limit, GuestbookRepository $guestbookRepository){
+        $lastMessage = $guestbookRepository->findBy(
+            array(),
+            array('id' => 'DESC'),
+            $limit,
+            0
+        );
+
+        return $this->render('guestbook/widget.html.twig',
+            array('messages' => $lastMessage)
+        );
+    }
 
 }

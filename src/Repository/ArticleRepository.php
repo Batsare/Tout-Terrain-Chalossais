@@ -2,18 +2,18 @@
 
 namespace App\Repository;
 
-use App\Entity\Post;
+use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class PostRepository extends ServiceEntityRepository
+class ArticleRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Post::class);
+        parent::__construct($registry, Article::class);
     }
 
     /*
@@ -45,7 +45,7 @@ class PostRepository extends ServiceEntityRepository
         $lastPost = $this->findBy([], ['id' => 'DESC'],1, 4);
 
         $this->createQueryBuilder('c')
-            ->update('App:Post', 'p')
+            ->update('App:Article', 'p')
             ->set('p.archived','true')
             ->set('p.published','false')
             ->where('p.id = ?1')
@@ -58,7 +58,7 @@ class PostRepository extends ServiceEntityRepository
 
     public function deleteById($id){
         $this->createQueryBuilder('c')
-            ->delete('App:Post', 'p')
+            ->delete('App:Article', 'p')
             ->where('p.id = ?1')
             ->setParameter('1', $id)
             ->getQuery()
@@ -70,7 +70,7 @@ class PostRepository extends ServiceEntityRepository
     public function findLatest(int $page = 1): Pagerfanta
     {
         $query = $this->getEntityManager()
-            ->createQuery('SELECT a FROM App:Post a ORDER BY a.id DESC')
+            ->createQuery('SELECT a FROM App:Article a ORDER BY a.id DESC')
         ;
         return $this->createPaginator($query, $page);
     }

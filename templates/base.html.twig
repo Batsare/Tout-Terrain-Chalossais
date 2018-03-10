@@ -13,17 +13,17 @@
         {% block body %}
             <header>
                 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                    <a class="navbar-brand" href="#">Fixed navbar</a>
+                    <a class="navbar-brand" href="#">Tout Terrain Chalossais</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="nav navbar-nav mr-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="{{ path('home') }}">Accueil <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('post_home') }}">Articles</a>
+                                <a class="nav-link" href="{{ path('article_home') }}">Articles</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('guestbook') }}">Livre d'or</a>
@@ -43,11 +43,11 @@
                 {% endblock %}
             </header>
 
-            <div class="container-ttc">
+            <main class="container-ttc rounded-top">
                 {% block container %}
 
                 {% endblock %}
-            </div>
+            </main>
         {% endblock %}
         {% block javascripts %}
             <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -58,4 +58,5 @@
             <script src={{ asset("build/js/app.js") }} ></script>
         {% endblock %}
     </body>
+
 </html>

@@ -1,0 +1,18 @@
+{% for article in articles %}
+    <div class="pb-md-4">
+        <div class="row">
+            <div class="col-md-12 ">
+                <p class="h2"><a class="text-success" href="{{ path('article_view', {'id': article.id}) }}">{{ article.title }}</a></p>
+                <hr>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-10">
+                <img src="{{ article.image.webPath }}" class="img-thumbnail img-fluid" alt="">
+            </div>
+            <div class="col-md-12 ">
+                <p>{{ article.content | raw | striptags("img") | slice(0, 500) }}... <a href="{{ path('article_view', {'id': article.id}) }}">Lire plus</a></p>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -1,40 +1,41 @@
-index:
+home:
     path: /
-    defaults: { _controller: 'App\Controller\DefaultController::index' }
+    controller: App\Controller\HomeController:indexAction
 
 
-post_home:
-    path: /post/{page}
-    controller: App\Controller\PostController:indexAction
+
+article_home:
+    path: /article/{page}
+    controller: App\Controller\ArticleController:indexAction
     defaults:
             page: 1
     requirements:
             page: '\d+'
 
-post_view:
-    path: /post/view/{id}
-    controller: App\Controller\PostController:viewAction
+article_view:
+    path: /article/view/{id}
+    controller: App\Controller\ArticleController:viewAction
     requirements:
             page: '\d+'
-post_add:
-    path: /post/add
-    controller: App\Controller\PostController:addAction
+article_add:
+    path: /article/add
+    controller: App\Controller\ArticleController:addAction
 
-post_edit:
-    path: /post/edit/{id}
-    controller: App\Controller\PostController:editAction
+article_edit:
+    path: /article/edit/{id}
+    controller: App\Controller\ArticleController:editAction
     requirements:
                 page: '\d+'
 
-post_delete:
-    path: /post/delete/{id}
-    controller: App\Controller\PostController:deleteAction
+article_delete:
+    path: /article/delete/{id}
+    controller: App\Controller\ArticleController:deleteAction
     requirements:
                 page: '\d+'
 
-post_archive:
-    path: /post/archive
-    controller: App\Controller\PostController:archiveAction
+article_archive:
+    path: /article/archive
+    controller: App\Controller\ArticleController:archiveAction
 
 guestbook:
     path: /guestbook/{page}
@@ -51,4 +52,4 @@ kms_froala_editor:
 app_paramconverter:
     path: /test/{json}
     defaults:
-      _controller: "App:Post:ParamConverter"
+      _controller: "App:article:ParamConverter"

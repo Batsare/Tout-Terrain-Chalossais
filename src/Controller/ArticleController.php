@@ -1,9 +1,9 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\Post;
-use App\Repository\PostRepository;
-use App\Type\PostType;
+use App\Entity\Article;
+use App\Repository\ArticleRepository;
+use App\Type\ArticleType;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -13,9 +13,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class PostController extends Controller
+class ArticleController extends Controller
 {
-    public function indexAction(Environment $twig, PostRepository $postRepository, $page)
+    public function indexAction(Environment $twig, ArticleRepository $postRepository, $page)
     {
         //$postsNews = $doctrine->getRepository(Post::class)->findBy([],['id' => 'DESC'], 4, 0);
         //$postsNews = $postRepository->postPublished();
@@ -37,25 +37,25 @@ class PostController extends Controller
 
 
 
-        return new Response($twig->render('post/index.html.twig', [
+        return new Response($twig->render('article/index.html.twig', [
             'postsNews' => $postsNews,
             'my_pager' => $pagerfanta
         ]));
     }
 
-    public function viewAction(Post $post, Environment $twig)
+    public function viewAction(Article $post, Environment $twig)
     {
 
-        return new Response($twig->render('post/view.html.twig', [
-            'post' => $post
+        return new Response($twig->render('article/view.html.twig', [
+            'article' => $post
         ]));
     }
 
-    public function addAction(PostRepository $postRepository, RedirectController $redirectController, FormFactoryInterface $formFactory, Environment $twig, RegistryInterface $doctrine, Request $request)
+    public function addAction(ArticleRepository $postRepository, RedirectController $redirectController, FormFactoryInterface $formFactory, Environment $twig, RegistryInterface $doctrine, Request $request)
     {
-        $post = New Post();
+        $post = New Article();
 
-        $form = $formFactory->create(PostType::class, $post);
+        $form = $formFactory->create(ArticleType::class, $post);
 
         $form->handleRequest($request);
 
@@ -69,16 +69,16 @@ class PostController extends Controller
 
             // On redirige vers la page de visualisation de l'annonce nouvellement créée
 
-            return $redirectController->redirectAction($request, 'post_home');
+            return $redirectController->redirectAction($request, 'article_home');
         }
-        return new Response($twig->render('post/add.html.twig',[
+        return new Response($twig->render('article/add.html.twig',[
             'form' => $form->createView()
         ]));
     }
 
-    public function editAction(Post $post, Request $request,Environment $twig, FormFactoryInterface $formFactory, RegistryInterface $registry)
+    public function editAction(Article $post, Request $request,Environment $twig, FormFactoryInterface $formFactory, RegistryInterface $registry)
     {
-        $form = $formFactory->create(PostType::class, $post);
+        $form = $formFactory->create(ArticleType::class, $post);
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             // Inutile de persister ici, Doctrine connait déjà notre annonce
 
@@ -86,18 +86,18 @@ class PostController extends Controller
 
             //$request->getSession()->getFlashBag()->add('notice', 'Annonce bien modifiée.');
 
-            //return $redirectResponse->redirectToRoute('post_view', array('id' => $post->getId()));
-            return $this->redirectToRoute('post_view',array('id'=> $post->getId()));
+            //return $redirectResponse->redirectToRoute('post_view', array('id' => $article->getId()));
+            return $this->redirectToRoute('article_view',array('id'=> $post->getId()));
 
         }
-        return $this->render('post/edit.html.twig', array(
-            'post' => $post,
+        return $this->render('article/edit.html.twig', array(
+            'article' => $post,
             'form'   => $form->createView(),
         ));
     }
 
 
-    public function deleteAction(Post $post,RegistryInterface $doctrine,FormFactoryInterface $formFactory, Environment $twig, RedirectController $redirectController, Request $request)
+    public function deleteAction(Article $post,RegistryInterface $doctrine,FormFactoryInterface $formFactory, Environment $twig, RedirectController $redirectController, Request $request)
     {
         $em = $doctrine->getManager();
         // On crée un formulaire vide, qui ne contiendra que le champ CSRF
@@ -109,10 +109,27 @@ class PostController extends Controller
             //$request->getSession()->getFlashBag()->add('info', "L'annonce a bien été supprimée.");
             return $redirectController->redirectAction($request, 'post_home');
         }
-        return new Response($twig->render('post/delete.html.twig', array(
-            'post' => $post,
+        return new Response($twig->render('article/delete.html.twig', array(
+            'article' => $post,
             'form'   => $form->createView(),
         )));
+    }
+
+    public function homeAction($limit, ArticleRepository $postRepository){
+        $em = $this->getDoctrine()->getManager();
+
+        $lastArticles = $postRepository->findBy(
+            array(),
+            array('date' => 'DESC'),
+            $limit,
+            0
+        );
+
+        return $this->render('article/home.html.twig', array(
+            'articles' => $lastArticles
+        ));
+
+
     }
 
     public function archiveAction(){

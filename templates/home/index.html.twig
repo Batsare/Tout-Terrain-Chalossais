@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block container %}
+
+
+    <div class="row justify-content-center">
+        <div class="col-xl-5">
+            <div class="row justify-content-start ">
+                <div class="h2 rounded bg-success text-white ml-3 pl-2 pr-2">Bla Bla récent</div>
+            </div>
+            {{ render(controller("App\\Controller\\GuestbookController:widgetAction", {'limit': 1})) }}
+        </div>
+        <div class="col-xl-5">
+            <div class="row justify-content-start ">
+                <div class="h2 rounded bg-success text-white ml-3 pl-2 pr-2">Facebook</div>
+            </div>
+            {{ render(controller("App\\Controller\\HomeController:facebookAction")) }}
+        </div>
+    </div>
+
+    <div class="row justify-content-start offset-xl-1 ">
+        <div class="h2 rounded bg-success text-white pl-2 pr-2">Articles récents</div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-xl-5">
+            {{ render(controller("App\\Controller\\ArticleController:homeAction", {'limit': 1})) }}
+        </div>
+        <div class="col-xl-5"></div>
+    </div>
+{%  endblock %}

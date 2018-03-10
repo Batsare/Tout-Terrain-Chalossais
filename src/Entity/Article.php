@@ -8,9 +8,9 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  */
-class Post
+class Article
 {
 
     public function __construct()
@@ -92,7 +92,7 @@ class Post
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category", cascade={"persist"})
-     * @ORM\JoinTable(name="post_category")
+     * @ORM\JoinTable(name="article_category")
      */
     private $categories;
 

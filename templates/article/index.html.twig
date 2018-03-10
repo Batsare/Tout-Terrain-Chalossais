@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block title %}Articles récents {% endblock %}
+{% block h1 %}Articles récents {% endblock %}
+{% block container %}
+    <div class="" >
+        <div class="row justify-content-end mr-1 ">
+            <div class="h2 rounded bg-success text-white pl-2 pr-2">Liste d'article</div>
+        </div>
+        <div class="row justify-content-start ml-4">
+            <div class="col-xl-6">
+                <p>
+                    <a href="{{ path('article_add') }}" class="btn btn-outline-success">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        Ajouter un article
+                    </a>
+                </p>
+            </div>
+        </div>
+    {% for article in postsNews %}
+        <div class="pb-md-4">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <p class="h2"><a class="text-success" href="{{ path('article_view', {'id': article.id}) }}">{{ article.title }}</a></p>
+                    <hr>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col-md-4">
+                    <img src="{{ article.image.webPath }}" class="img-thumbnail img-fluid" alt="">
+                </div>
+                <div class="col-md-6 pt-md-4">
+                    <p>{{ article.content | raw | striptags("img") | slice(0, 500) }}... <a href="{{ path('article_view', {'id': article.id}) }}">Lire plus</a></p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+        <div class="row justify-content-md-center">
+            <div class="">
+                <div class="pagerfanta">
+                    {{ pagerfanta(my_pager, 'twitter_bootstrap4_translated') }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
