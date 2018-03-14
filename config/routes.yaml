@@ -45,6 +45,36 @@ guestbook:
     requirements:
             page: '\d+'
 
+
+gallery_home:
+    path: /gallery/{page}
+    controller: App\Controller\GalleryController:indexAction
+    defaults:
+            page: 1
+    requirements:
+            page: '\d+'
+
+gallery_view:
+    path: /gallery/view/{id}
+    controller: App\Controller\GalleryController:viewAction
+    requirements:
+            page: '\d+'
+gallery_add:
+    path: /gallery/add
+    controller: App\Controller\GalleryController:addAction
+
+gallery_edit:
+    path: /gallery/edit/{id}
+    controller: App\Controller\GalleryController:editAction
+    requirements:
+                page: '\d+'
+
+gallery_delete:
+    path: /gallery/delete/{id}
+    controller: App\Controller\GalleryController:deleteAction
+    requirements:
+                page: '\d+'
+
 kms_froala_editor:
   resource: "@KMSFroalaEditorBundle/Resources/config/routing.yml"
   prefix:   /froalaeditor
