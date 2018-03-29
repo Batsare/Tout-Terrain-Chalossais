@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\GaleryRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\GalleryRepository")
  */
 class Gallery
 {
@@ -28,6 +29,35 @@ class Gallery
      */
     private $createdAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Photo", mappedBy="gallery")
+     */
+    private $photos;
+
+
+    public function __construct()
+    {
+        $this->photos = array();
+    }
+
+    public function addPhoto(Photo $file)
+    {
+        $this->photos[] = $file;
+
+        $file->setGallery($this);
+
+        return $this;
+    }
+
+    public function removePhoto(Photo $file)
+    {
+        $this->photos->removeElement($file);
+    }
+
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
 
     /**
      * @return mixed

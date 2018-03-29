@@ -32,7 +32,7 @@ class Photo
     private $alt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Gallery")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Gallery", inversedBy="photos", cascade = {"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $gallery;
@@ -51,6 +51,9 @@ class Photo
      */
     public function preUpload()
     {
+        if( is_array($this->file)){
+            die('ok');
+        }
         // Si jamais il n'y a pas de fichier (champ facultatif), on ne fait rien
         if (null === $this->file) {
             return;
