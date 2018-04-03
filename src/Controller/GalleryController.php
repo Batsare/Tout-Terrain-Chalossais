@@ -20,20 +20,26 @@ Class GalleryController extends Controller
 
     }
 
-    public function addAction(FormFactoryInterface $formFactory, Request $request, RegistryInterface $doctrine, RedirectController $redirectController, Environment $twig)
+    public function addAction(FormFactoryInterface $formFactory, Request $request, RedirectController $redirectController, Environment $twig)
     {
         $gallery = New Gallery();
         $photo = New Photo();
+        $gallery->addPhotos($photo);
 
-        $gallery->addPhoto($photo);
+
 
         $form = $formFactory->create(GalleryType::class, $gallery);
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $doctrine->getEntityManager()->persist($gallery);
-            $doctrine->getEntityManager()->flush();
+
+        if ($request->getMethod()!= 'GET' && $form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+var_dump($gallery);
+
+            $em->persist($gallery);
+            $em->flush();
 
             // On redirige vers la page de visualisation de l'annonce nouvellement créée
 

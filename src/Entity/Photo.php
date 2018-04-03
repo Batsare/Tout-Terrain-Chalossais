@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -11,6 +12,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PhotoRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Photo
 {
@@ -32,7 +34,7 @@ class Photo
     private $alt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Gallery", inversedBy="photos", cascade = {"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Gallery", inversedBy="photos")
      * @ORM\JoinColumn(nullable=false)
      */
     private $gallery;
@@ -42,18 +44,19 @@ class Photo
      */
     private $file;
 
+
+    /**
+     * @var ArrayCollection
+     */
+    private $files;
+
     // On ajoute cet attribut pour y stocker le nom du fichier temporairement
     private $tempFilename;
 
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
+
     public function preUpload()
     {
-        if( is_array($this->file)){
-            die('ok');
-        }
+
         // Si jamais il n'y a pas de fichier (champ facultatif), on ne fait rien
         if (null === $this->file) {
             return;
@@ -67,10 +70,7 @@ class Photo
         $this->alt = $this->file->getClientOriginalName();
     }
 
-    /**
-     * @ORM\PostPersist()
-     * @ORM\PostUpdate()
-     */
+
     public function upload()
     {
         // Si jamais il n'y a pas de fichier (champ facultatif), on ne fait rien
@@ -226,6 +226,23 @@ class Photo
     {
         $this->gallery = $gallery;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFiles()
+    {
+        return $this->files;
+    }
+
+    /**
+     * @param mixed $files
+     */
+    public function setFiles($files)
+    {
+        $this->files = $files;
+    }
+
 
 
 

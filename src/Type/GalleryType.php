@@ -24,7 +24,9 @@ class GalleryType extends AbstractType
         $builder
             ->add('createdAt',      DateTimeType::class)
             ->add('name',    TextType::class)
-            ->add('photos', PhotoType::class)
+            ->add('photos', PhotoType::class, array(
+                'data_class' => null,
+            ))
             ->add('save',      SubmitType::class, array(
                 'label' => 'Envoyer'
             ))

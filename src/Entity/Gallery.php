@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GalleryRepository")
+ * @@ORM\HasLifecycleCallbacks
  */
 class Gallery
 {
@@ -37,21 +38,21 @@ class Gallery
 
     public function __construct()
     {
-        $this->photos = array();
+        $this->photos = new ArrayCollection();
     }
 
-    public function addPhoto(Photo $file)
+    public function addPhotos(Photo $photo)
     {
-        $this->photos[] = $file;
 
-        $file->setGallery($this);
+        $this->photos[] = $photo;
 
+        //$photo->setGallery($this);
         return $this;
     }
 
-    public function removePhoto(Photo $file)
+    public function removePhoto(Photo $photo)
     {
-        $this->photos->removeElement($file);
+        $this->photos->removeElement($photo);
     }
 
     public function getPhotos()
@@ -108,6 +109,40 @@ class Gallery
     }
 
 
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        $photo = new Photo();
 
+        var_dump($this->getPhotos());die();
+        // Si jamais il n'y a pas de fichier (champ facultatif), on ne fait rien
+        if (null === $this->file) {
+            return;
+        }
+
+        // Le nom du fichier est son id, on doit juste stocker également son extension
+        // Pour faire propre, on devrait renommer cet attribut en « extension », plutôt que « url »
+        $this->url = $this->file->guessExtension();
+
+        // Et on génère l'attribut alt de la balise <img>, à la valeur du nom du fichier sur le PC de l'internaute
+        $this->alt = $this->file->getClientOriginalName();
+
+        // Si on avait un ancien fichier (attribut tempFilename non null), on le supprime
+        if (null !== $this->tempFilename) {
+            $oldFile = $this->getUploadRootDir().'/'.$this->id.'.'.$this->tempFilename;
+            if (file_exists($oldFile)) {
+                unlink($oldFile);
+            }
+        }
+
+        // On déplace le fichier envoyé dans le répertoire de notre choix
+        $this->file->move(
+            $this->getUploadRootDir(), // Le répertoire de destination
+            $this->id.'.'.$this->url   // Le nom du fichier à créer, ici « id.extension »
+        );
+    }
 
 }
