@@ -34,7 +34,7 @@ class Photo
     private $alt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Gallery", inversedBy="photos")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Gallery",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $gallery;
@@ -44,16 +44,25 @@ class Photo
      */
     private $file;
 
-
     /**
      * @var ArrayCollection
      */
     private $files;
 
+
     // On ajoute cet attribut pour y stocker le nom du fichier temporairement
     private $tempFilename;
 
 
+    public function __construct()
+    {
+        $this->files = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
     public function preUpload()
     {
 
@@ -70,7 +79,10 @@ class Photo
         $this->alt = $this->file->getClientOriginalName();
     }
 
-
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
     public function upload()
     {
         // Si jamais il n'y a pas de fichier (champ facultatif), on ne fait rien
@@ -117,7 +129,7 @@ class Photo
     public function getUploadDir()
     {
         // On retourne le chemin relatif vers l'image pour un navigateur (relatif au répertoire /web donc)
-        return '/uploads/img';
+        return '/uploads/img/'.$this->getGallery()->getName();
     }
 
     protected function getUploadRootDir()
@@ -130,6 +142,7 @@ class Photo
     {
         return $this->getUploadDir().'/'.$this->getId().'.'.$this->getUrl();
     }
+    
 
     /**
      * @return mixed
@@ -242,6 +255,8 @@ class Photo
     {
         $this->files = $files;
     }
+
+
 
 
 

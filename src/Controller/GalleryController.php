@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Gallery;
 use App\Entity\Photo;
 use App\Type\GalleryType;
+use App\Type\PhotoType;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\RedirectController;
@@ -24,11 +25,11 @@ Class GalleryController extends Controller
     {
         $gallery = New Gallery();
         $photo = New Photo();
-        $gallery->addPhotos($photo);
+        //$gallery->addPhotos($photo);
 
 
 
-        $form = $formFactory->create(GalleryType::class, $gallery);
+        $form = $formFactory->create(PhotoType::class, $photo);
 
         $form->handleRequest($request);
 
@@ -36,9 +37,22 @@ Class GalleryController extends Controller
         if ($request->getMethod()!= 'GET' && $form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-var_dump($gallery);
 
-            $em->persist($gallery);
+
+            foreach ($photo->getFiles() as $file){
+                $photo = new Photo();
+                $photo->setFile($file);
+                $photo->setGallery($form->getData()->getGallery());
+                $em->persist($photo);
+            }
+
+
+
+
+
+
+
+            //$em->persist($gallery);
             $em->flush();
 
             // On redirige vers la page de visualisation de l'annonce nouvellement créée

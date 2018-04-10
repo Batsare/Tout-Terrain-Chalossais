@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GalleryType extends AbstractType
@@ -24,12 +25,6 @@ class GalleryType extends AbstractType
         $builder
             ->add('createdAt',      DateTimeType::class)
             ->add('name',    TextType::class)
-            ->add('photos', PhotoType::class, array(
-                'data_class' => null,
-            ))
-            ->add('save',      SubmitType::class, array(
-                'label' => 'Envoyer'
-            ))
         ;
     }
 

@@ -107,7 +107,7 @@ class ArticleController extends Controller
             $em->remove($post);
             $em->flush();
             //$request->getSession()->getFlashBag()->add('info', "L'annonce a bien été supprimée.");
-            return $redirectController->redirectAction($request, 'post_home');
+            return $redirectController->redirectAction($request, 'article_home');
         }
         return new Response($twig->render('article/delete.html.twig', array(
             'article' => $post,
