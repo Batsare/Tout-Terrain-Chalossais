@@ -18,7 +18,12 @@ Class GalleryController extends Controller
 {
     public function indexAction()
     {
+        $em = $this->getDoctrine()->getManager();
+        $galleries = $em->getRepository('App:Gallery')->findAll();
 
+        return new Response($this->renderView('gallery/index.html.twig',array(
+            'galleries' => $galleries
+        )));
     }
 
     public function addAction(FormFactoryInterface $formFactory, Request $request, RedirectController $redirectController, Environment $twig)
@@ -34,10 +39,8 @@ Class GalleryController extends Controller
         $form->handleRequest($request);
 
 
-        if ($request->getMethod()!= 'GET' && $form->isSubmitted() && $form->isValid()) {
+        if ($request->getMethod() != 'GET' && $form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-
-
 
             foreach ($photo->getFiles() as $file){
                 $photo = new Photo();
@@ -46,12 +49,6 @@ Class GalleryController extends Controller
                 $em->persist($photo);
             }
 
-
-
-
-
-
-
             //$em->persist($gallery);
             $em->flush();
 
@@ -59,7 +56,7 @@ Class GalleryController extends Controller
 
             return $redirectController->redirectAction($request, 'gallery_home');
         }
-        return new Response($twig->render('gallery/add.html.twig',[
+        return new Response($this->render('gallery/add.html.twig', [
             'form' => $form->createView()
         ]));
     }

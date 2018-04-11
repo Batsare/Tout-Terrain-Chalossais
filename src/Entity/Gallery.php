@@ -2,13 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GalleryRepository")
- * @@ORM\HasLifecycleCallbacks
+ * @ORM\HasLifecycleCallbacks
  */
 class Gallery
 {
@@ -54,6 +53,7 @@ class Gallery
     {
         return $this->photos;
     }
+
 
     /**
      * @param mixed $photos

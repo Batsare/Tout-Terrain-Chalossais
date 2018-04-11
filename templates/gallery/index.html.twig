@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+<ul class="list-group">
+    {% for gallery in galleries %}
+
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ gallery.name }}
+            <span class="badge badge-success badge-pill">{{ gallery.createdAt|date("d/m/Y") }}</span>
+        </li>
+
+    {% endfor %}
+
+</ul>
+
+{% endblock %}

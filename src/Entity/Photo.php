@@ -103,6 +103,18 @@ class Photo
             $this->getUploadRootDir(), // Le répertoire de destination
             $this->id.'.'.$this->url   // Le nom du fichier à créer, ici « id.extension »
         );
+
+        if (!is_dir($this->getUploadSmallDir())) {
+            mkdir($this->getUploadSmallDir());
+        }
+        copy(
+            $this->getUploadRootDir().'/'.$this->id.'.'.$this->url,
+            $this->getUploadSmallDir().$this->id.'.'.$this->url
+        );
+
+        $img = imagecreatefromjpeg($this->getUploadSmallDir().$this->id.'.'.$this->url);
+        imagejpeg($img,
+            $this->getUploadSmallDir().$this->id.'.'.$this->url,50);
     }
 
     /**
@@ -129,13 +141,19 @@ class Photo
     public function getUploadDir()
     {
         // On retourne le chemin relatif vers l'image pour un navigateur (relatif au répertoire /web donc)
-        return '/uploads/img/'.$this->getGallery()->getName();
+        return '/uploads/img/galleries/'.$this->getGallery()->getName();
     }
 
     protected function getUploadRootDir()
     {
         // On retourne le chemin relatif vers l'image pour notre code PHP
-        return __DIR__.'/../../public/'.$this->getUploadDir();
+        return __DIR__.'/../../public/'.$this->getUploadDir().'/large/';
+    }
+
+    protected function getUploadSmallDir()
+    {
+        // On retourne le chemin relatif vers l'image pour notre code PHP
+        return __DIR__.'/../../public/'.$this->getUploadDir().'/small/';
     }
 
     public function getWebPath()
