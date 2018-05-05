@@ -6,7 +6,8 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
             <link rel="stylesheet" href={{ asset("build/css/app.css") }}>
-            <link rel="stylesheet" href={{ asset("bundles/kmsfroalaeditor/froala_editor_2.7.5/css/froala_style.min.css") }}>
+            <link rel="stylesheet" href={{ asset("assets/vendor/lightgallery/src/css/lightgallery.css") }}>
+            <link rel="stylesheet" href={{ asset("bundles/kmsfroalaeditor/froala_editor_2.8.1/css/froala_style.min.css") }}>
         {% endblock %}
     </head>
     <body class="container">
@@ -26,7 +27,7 @@
                                 <a class="nav-link" href="{{ path('article_home') }}">Articles</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('guestbook') }}">Livre d'or</a>
+                                <a class="nav-link" href="{{ path('guestbook') }}">Bla Bla</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link disabled" href="#">Disabled</a>
@@ -52,9 +53,12 @@
         {% block javascripts %}
             <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-            <script src="{{ asset( 'bundles/kmsfroalaeditor/froala_editor_2.7.5/js/froala_editor.min.js' ) }}"></script>
-            <script src="{{ asset( 'bundles/kmsfroalaeditor/froala_editor_2.7.5/js/plugins/image.min.js' ) }}"></script>
-            <script src="{{ asset( 'bundles/kmsfroalaeditor/froala_editor_2.7.5/js/plugins/image_manager.min.js' ) }}"></script>
+            <script src="{{ asset( 'bundles/kmsfroalaeditor/froala_editor_2.8.1/js/froala_editor.min.js' ) }}"></script>
+            <script src="{{ asset( 'bundles/kmsfroalaeditor/froala_editor_2.8.1/js/plugins/image.min.js' ) }}"></script>
+            <script src="{{ asset( 'bundles/kmsfroalaeditor/froala_editor_2.8.1/js/plugins/image_manager.min.js' ) }}"></script>
+            <script src="{{ asset( 'assets/vendor/lightgallery/src/js/lightgallery.js' ) }}"></script>
+            <script src="{{ asset( 'assets/vendor/lightgallery/modules/lg-thumbnail.js' ) }}"></script>
+            <script src="{{ asset( 'assets/vendor/lightgallery/modules/lg-fullscreen.js' ) }}"></script>
             <script src={{ asset("build/js/app.js") }} ></script>
         {% endblock %}
     </body>

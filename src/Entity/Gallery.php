@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -24,6 +25,7 @@ class Gallery
     private $name;
 
     /**
+     * @var DateTime
      * @ORM\Column(name="createdAt", type="datetime")
      * @Assert\DateTime()
      */
@@ -43,7 +45,7 @@ class Gallery
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
+        $this->createdAt = new DateTime();
     }
 
     /**

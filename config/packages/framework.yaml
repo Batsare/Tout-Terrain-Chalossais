@@ -1,6 +1,6 @@
 framework:
     secret: '%env(APP_SECRET)%'
-    #default_locale: en
+    default_locale: fr
     #csrf_protection: ~
     #http_method_override: true
 
@@ -9,6 +9,8 @@ framework:
     session:
         handler_id: ~
 
+    validation:
+        enable_annotations: true
     #esi: ~
     #fragments: ~
     php_errors:

@@ -30,14 +30,6 @@ class ArticleType extends AbstractType
                 "saveParams" => [ "id" => "myEditorField" ]
             ))
             ->add('image',     ImageType::class)
-            ->add('categories', EntityType::class, array(
-                'class'         => 'App:Category',
-                'choice_label'  => 'name',
-                'multiple'      => true,
-                'query_builder' => function(CategoryRepository $repository) {
-                    return $repository->getLikeQueryBuilder();
-                }
-            ))
             ->add('published', CheckboxType::class, array(
                 'label' => 'Publier',
                 'required' => false))

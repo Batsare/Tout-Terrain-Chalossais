@@ -13,10 +13,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class Article
 {
 
-    public function __construct()
-    {
-        $this->date = new \DateTime();
-    }
+
 
     /**
      * @ORM\Id
@@ -90,18 +87,16 @@ class Article
      */
     private $image;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Category", cascade={"persist"})
-     * @ORM\JoinTable(name="article_category")
-     */
-    private $categories;
 
     /**
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
 
-
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
     /**
      * @return mixed
      */
@@ -129,7 +124,7 @@ class Article
     /**
      * @param \DateTime $date
      */
-    public function setDate(\DateTime $date)
+    public function setDate(?\DateTime $date)
     {
         $this->date = $date;
     }
@@ -212,22 +207,6 @@ class Article
     public function setImage($image)
     {
         $this->image = $image;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
-
-    /**
-     * @param mixed $categories
-     */
-    public function setCategories($categories)
-    {
-        $this->categories = $categories;
     }
 
     /**

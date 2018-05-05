@@ -41,6 +41,10 @@ class Photo
 
     /**
      * @var UploadedFile
+     * @Assert\Image(
+     *      mimeTypes = {"image/jpeg","image/jpg"},
+     *     mimeTypesMessage="Le format de l'image est incorrect"
+     * )
      */
     private $file;
 
@@ -112,9 +116,16 @@ class Photo
             $this->getUploadSmallDir().$this->id.'.'.$this->url
         );
 
-        $img = imagecreatefromjpeg($this->getUploadSmallDir().$this->id.'.'.$this->url);
-        imagejpeg($img,
-            $this->getUploadSmallDir().$this->id.'.'.$this->url,50);
+        if ( mime_content_type( $this->getUploadSmallDir().$this->id.'.'.$this->url ) === 'image/jpg' || mime_content_type( $this->getUploadSmallDir().$this->id.'.'.$this->url ) === 'image/jpeg'){
+            $img = imagecreatefromjpeg($this->getUploadSmallDir().$this->id.'.'.$this->url);
+            imagejpeg($img,
+                $this->getUploadSmallDir().$this->id.'.'.$this->url,50);
+        }
+        if ( mime_content_type( $this->getUploadSmallDir().$this->id.'.'.$this->url ) === 'image/png'){
+            $img = imagecreatefrompng($this->getUploadSmallDir().$this->id.'.'.$this->url);
+            imagepng($img,
+                $this->getUploadSmallDir().$this->id.'.'.$this->url,5);
+        }
     }
 
     /**
@@ -158,9 +169,12 @@ class Photo
 
     public function getWebPath()
     {
-        return $this->getUploadDir().'/'.$this->getId().'.'.$this->getUrl();
+        return '../../../'.$this->getUploadDir().'/large/'.$this->getId().'.'.$this->getUrl();
     }
-    
+    public function getWebThumbPath()
+    {
+        return '../../../'.$this->getUploadDir().'/small/'.$this->getId().'.'.$this->getUrl();
+    }
 
     /**
      * @return mixed

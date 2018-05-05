@@ -106,18 +106,18 @@ class Image
     public function getUploadDir()
     {
         // On retourne le chemin relatif vers l'image pour un navigateur (relatif au répertoire /web donc)
-        return '/uploads/img';
+        return '/uploads/img/images_articles';
     }
 
     protected function getUploadRootDir()
     {
         // On retourne le chemin relatif vers l'image pour notre code PHP
-        return __DIR__.'/../../public/'.$this->getUploadDir().'/images_articles';
+        return __DIR__.'/../../public/'.$this->getUploadDir();
     }
 
     public function getWebPath()
     {
-        return $this->getUploadDir().'/images_articles/'.$this->getId().'.'.$this->getUrl();
+        return $this->getUploadDir().'/'.$this->getId().'.'.$this->getUrl();
     }
 
     /**

@@ -1,18 +1,30 @@
 {% for article in articles %}
-    <div class="pb-md-4">
-        <div class="row">
-            <div class="col-md-12 ">
-                <p class="h2"><a class="text-success" href="{{ path('article_view', {'id': article.id}) }}">{{ article.title }}</a></p>
-                <hr>
+        <div class="row justify-content-md-start">
+            <div class="col-12">
+                <div class="thumbnail ">
+                    <img src="{{ article.image.webPath }}" alt="" class="img-thumbnail img-fluid">
+                    <div class="caption col-8 pl-0">
+                        <div class="rounded-right bg-success pl-2">
+                            <p class="h3"><a class="text-dark align-text-top" href="{{ path('article_view', {'id': article.id}) }}">{{ article.title }}</a></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row justify-content-md-center">
-            <div class="col-md-10">
-                <img src="{{ article.image.webPath }}" class="img-thumbnail img-fluid" alt="">
-            </div>
+
+        {#<div class="row">#}
+            {#<div class="col-md-12 ">#}
+                {#<p class="h2"><a class="text-success" href="{{ path('article_view', {'id': article.id}) }}">{{ article.title }}</a></p>#}
+                {#<hr>#}
+            {#</div>#}
+        {#</div>#}
+        <div class="row justify-content-md-start">
+            {#<div class="col-md-10">#}
+                {#<img src="{{ article.image.webPath }}" class="img-thumbnail img-fluid" alt="">#}
+            {#</div>#}
             <div class="col-md-12 ">
                 <p>{{ article.content | raw | striptags("img") | slice(0, 500) }}... <a href="{{ path('article_view', {'id': article.id}) }}">Lire plus</a></p>
             </div>
         </div>
-    </div>
+
 {% endfor %}

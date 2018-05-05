@@ -9,6 +9,7 @@ use App\Type\PhotoType;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\RedirectController;
+use function Symfony\Component\Debug\Tests\testHeader;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,7 +57,7 @@ Class GalleryController extends Controller
 
             return $redirectController->redirectAction($request, 'gallery_home');
         }
-        return new Response($this->render('gallery/add.html.twig', [
+        return new Response($this->renderView('gallery/add.html.twig', [
             'form' => $form->createView()
         ]));
     }
@@ -66,8 +67,15 @@ Class GalleryController extends Controller
 
     }
 
-    public function viewAction()
+    public function viewAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $photos = $em->getRepository('App:Photo')->findBy(array('gallery' => $id));
+        $gallery = $em->getRepository('App:Gallery')->find($id);
+        return new Response($this->renderView('gallery/view.html.twig',array(
+            'photos' => $photos,
+            'gallery' => $gallery,
+        )));
 
     }
 }

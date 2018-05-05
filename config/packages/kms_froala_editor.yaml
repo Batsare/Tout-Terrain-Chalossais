@@ -1,12 +1,11 @@
 kms_froala_editor:
 
     language: "fr"
-
   # The image upload folder in your /web directory.
     # Default: "/upload".
-    imageUploadFolder: "/uploads/img"
+    imageUploadFolder: "/uploads/img/blabla"
 
     # The image upload URL base.
     # Usage: if you are using URL rewritting for your assets.
     # Default: same value as provided as folder.
-    imageUploadPath: "/uploads/img"
+    imageUploadPath: "/uploads/img/blabla"

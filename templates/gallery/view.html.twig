@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{%  block container %}
+    <h3>{{ gallery.name }}</h3>
+
+
+
+    <div id="lightgallery">
+        {% for photo in photos %}
+
+                <a href="{{ photo.webPath }}">
+                    <img src="{{ photo.webThumbPath }}" class="img-thumbnail col-lg-2" alt="{{ photo.alt }}"/>
+                </a>
+
+        {% endfor %}
+    </div>
+
+
+
+{%  endblock %}

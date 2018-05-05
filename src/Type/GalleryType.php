@@ -22,7 +22,10 @@ class GalleryType extends AbstractType
 
 
         $builder
-            ->add('createdAt',      DateTimeType::class)
+            ->add('createdAt',     DateTimeType::class, array(
+                'data' => new \DateTime('now'),
+                'disabled' => true,
+            ))
 
             ->add('name',    TextType::class)
         ;
