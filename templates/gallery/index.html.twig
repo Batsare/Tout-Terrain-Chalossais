@@ -3,6 +3,16 @@
 {% block container %}
 <div class="row">
     <div class="col-12">
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="row justify-content-end pr-5">
+                <p>
+                    <a href="{{ path('gallery_add') }}" class="btn btn-outline-success">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        Ajouter un album
+                    </a>
+                </p>
+            </div>
+        {% endif %}
         <div class="row">
             {#<div class="h1 rounded bg-success text-white pl-2 pr-2">Album photos</div>#}
             <div class="col-12 col-md-6">

@@ -4,20 +4,26 @@
 
     <div class="row justify-content-end">
         <div class="col-xl-5">
-            <p>
-                <a href="{{ path('article_home') }}" class="btn btn-outline-success">
-                    <i class="glyphicon glyphicon-chevron-left"></i>
-                    Retour à la liste
-                </a>
-                <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-outline-success">
-                    <i class="glyphicon glyphicon-edit"></i>
-                    Modifier l'article
-                </a>
-                <a href="{{ path('article_delete', {'id': article.id}) }}" class="btn btn-danger">
-                    <i class="glyphicon glyphicon-trash"></i>
-                    Supprimer l'article
-                </a>
-            </p>
+            <div class="row justify-content-end">
+                <div class="col-5"><p>
+                        <a href="{{ path('article_home') }}" class="btn btn-outline-success">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                            Retour à la liste
+                        </a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-outline-success">
+                                <i class="glyphicon glyphicon-edit"></i>
+                                Modifier l'article
+                            </a>
+                            <a href="{{ path('article_delete', {'id': article.id}) }}" class="btn btn-danger">
+                                <i class="glyphicon glyphicon-trash"></i>
+                                Supprimer l'article
+                            </a>
+                        {% endif %}
+
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
     <div   class="row justify-content-md-start offset-1">
@@ -42,20 +48,26 @@
     </div>
     <div class="row justify-content-end">
         <div class="col-xl-5">
-            <p>
-                <a href="{{ path('article_home') }}" class="btn btn-outline-success">
-                    <i class="glyphicon glyphicon-chevron-left"></i>
-                    Retour à la liste
-                </a>
-                <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-outline-success">
-                    <i class="glyphicon glyphicon-edit"></i>
-                    Modifier l'article
-                </a>
-                <a href="{{ path('article_delete', {'id': article.id}) }}" class="btn btn-danger">
-                    <i class="glyphicon glyphicon-trash"></i>
-                    Supprimer l'article
-                </a>
-            </p>
+            <div class="row justify-content-end">
+                <div class="col-5"><p>
+                        <a href="{{ path('article_home') }}" class="btn btn-outline-success">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                            Retour à la liste
+                        </a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-outline-success">
+                                <i class="glyphicon glyphicon-edit"></i>
+                                Modifier l'article
+                            </a>
+                            <a href="{{ path('article_delete', {'id': article.id}) }}" class="btn btn-danger">
+                                <i class="glyphicon glyphicon-trash"></i>
+                                Supprimer l'article
+                            </a>
+                        {% endif %}
+
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 

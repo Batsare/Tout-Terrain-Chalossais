@@ -1,0 +1,21 @@
+<div class="row justify-content-center">
+    {#<p>{{ gallery.createdAt|date("d/m/Y") }} - </p>#}
+    {% for album in albums %}
+
+        <div class="col-12 text-center m-2"><a class=" h4 text-success" href="{{ path('gallery_view', { 'id' : album.id } ) }}">{{ album.createdAt|date("F Y") }} - {{ album.name }}</a></div>
+
+    {% endfor %}
+</div>
+
+
+
+{#{% for album in albums %}#}
+
+    {#<div id="post_guestbook" class="card">#}
+        {#<div class="card-body">#}
+            {#<div id="auhtor_guestbook" class="font-weight-bold"> {{ message.author }}</div>#}
+            {#<div id="content_guestbook"> {{ message.content | raw | striptags("img")}}</div>#}
+            {#<div id="date_guestbook" class="border-top"> {{ message.postedAt|date("d/m/Y H:i:s") }}</div>#}
+        {#</div>#}
+    {#</div>#}
+{#{% endfor %}#}

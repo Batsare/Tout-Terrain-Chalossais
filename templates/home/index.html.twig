@@ -27,9 +27,9 @@
         </div>
         <div class="col-xl-5">
             <div class="row justify-content-start ">
-                <div class="h2 rounded bg-success text-white ml-3 pl-2 pr-2">Facebook</div>
+                <div class="h2 rounded bg-success text-white ml-3 pl-2 pr-2">Albums récents</div>
             </div>
-            {{ render(controller("App\\Controller\\HomeController:facebookAction")) }}
+            {{ render(controller("App\\Controller\\GalleryController:widgetAction", {'limit': 4})) }}
         </div>
     </div>
 

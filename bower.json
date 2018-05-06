@@ -1,0 +1,18 @@
+{
+  "name": "Tout-Terrain-Chalossais",
+  "description": "",
+  "main": "",
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/Batsare/Tout-Terrain-Chalossais",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/assets/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lightgallery": "^1.6.9"
+  }
+}

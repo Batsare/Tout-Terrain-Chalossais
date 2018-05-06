@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Gallery;
 use App\Entity\Photo;
+use App\Repository\GalleryRepository;
 use App\Type\GalleryType;
 use App\Type\PhotoType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\RedirectController;
@@ -27,6 +29,9 @@ Class GalleryController extends Controller
         )));
     }
 
+    /**
+     * @Security("has_role('ROLE_ADMIN')")
+     */
     public function addAction(FormFactoryInterface $formFactory, Request $request, RedirectController $redirectController, Environment $twig)
     {
         $gallery = New Gallery();
@@ -62,9 +67,25 @@ Class GalleryController extends Controller
         ]));
     }
 
-    public function deleteAction()
+    /**
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function deleteAction(Gallery $gallery,RegistryInterface $doctrine,FormFactoryInterface $formFactory, Environment $twig, RedirectController $redirectController, Request $request)
     {
-
+        $em = $doctrine->getManager();
+        // On crée un formulaire vide, qui ne contiendra que le champ CSRF
+        // Cela permet de protéger la suppression d'annonce contre cette faille
+        $form = $formFactory->create();
+        if ($request->isMethod('POST')) {
+            $em->remove($gallery);
+            $em->flush();
+            //$request->getSession()->getFlashBag()->add('info', "L'annonce a bien été supprimée.");
+            return $redirectController->redirectAction($request, 'gallery_home');
+        }
+        return new Response($twig->render('gallery/delete.html.twig', array(
+            'album' => $gallery,
+            'form'   => $form->createView(),
+        )));
     }
 
     public function viewAction($id)
@@ -77,5 +98,18 @@ Class GalleryController extends Controller
             'gallery' => $gallery,
         )));
 
+    }
+
+    public function widgetAction($limit, GalleryRepository $galleryRepository){
+        $last4Albums = $galleryRepository->findBy(
+            array(),
+            array('id' => 'DESC'),
+            $limit,
+            0
+        );
+
+        return $this->render('gallery/widget.html.twig',
+            array('albums' => $last4Albums)
+        );
     }
 }

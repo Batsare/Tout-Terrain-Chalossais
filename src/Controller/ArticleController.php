@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use App\Type\ArticleType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -51,6 +52,21 @@ class ArticleController extends Controller
         ]));
     }
 
+    /**
+     * @param ArticleRepository $postRepository
+     * @param RedirectController $redirectController
+     * @param FormFactoryInterface $formFactory
+     * @param Environment $twig
+     * @param RegistryInterface $doctrine
+     * @param Request $request
+     * @return Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     * @Security("has_role('ROLE_ADMIN')")
+     */
     public function addAction(ArticleRepository $postRepository, RedirectController $redirectController, FormFactoryInterface $formFactory, Environment $twig, RegistryInterface $doctrine, Request $request)
     {
         $post = New Article();
@@ -76,6 +92,9 @@ class ArticleController extends Controller
         ]));
     }
 
+    /**
+     * @Security("has_role('ROLE_ADMIN')")
+     */
     public function editAction(Article $post, Request $request,Environment $twig, FormFactoryInterface $formFactory, RegistryInterface $registry)
     {
         $form = $formFactory->create(ArticleType::class, $post);
@@ -96,7 +115,9 @@ class ArticleController extends Controller
         ));
     }
 
-
+    /**
+     * @Security("has_role('ROLE_ADMIN')")
+     */
     public function deleteAction(Article $post,RegistryInterface $doctrine,FormFactoryInterface $formFactory, Environment $twig, RedirectController $redirectController, Request $request)
     {
         $em = $doctrine->getManager();

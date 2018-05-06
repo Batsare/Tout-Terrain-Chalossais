@@ -8,6 +8,7 @@
             <link rel="stylesheet" href={{ asset("build/css/app.css") }}>
             <link rel="stylesheet" href={{ asset("assets/vendor/lightgallery/src/css/lightgallery.css") }}>
             <link rel="stylesheet" href={{ asset("bundles/kmsfroalaeditor/froala_editor_2.8.1/css/froala_style.min.css") }}>
+            <link rel="stylesheet" href={{ asset("bundles/quill/dist/quill.snow.css") }}>
         {% endblock %}
     </head>
     <body class="container">
@@ -30,13 +31,16 @@
                                 <a class="nav-link" href="{{ path('guestbook') }}">Bla Bla</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link disabled" href="#">Disabled</a>
+                                <a class="nav-link" href="{{ path('gallery_home') }}">Albums</a>
                             </li>
+                            {#<li class="nav-item">#}
+                                {#<a class="nav-link disabled" href="#">Disabled</a>#}
+                            {#</li>#}
                         </ul>
-                        <form class="form-inline mt-2 mt-md-0">
-                            <input class="form-control mr-sm-2" placeholder="Search" aria-label="Search" type="text">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </form>
+                        {#<form class="form-inline mt-2 mt-md-0">#}
+                            {#<input class="form-control mr-sm-2" placeholder="Search" aria-label="Search" type="text">#}
+                            {#<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+                        {#</form>#}
                     </div>
                 </nav>
                 {% block header %}
@@ -56,6 +60,7 @@
             <script src="{{ asset( 'bundles/kmsfroalaeditor/froala_editor_2.8.1/js/froala_editor.min.js' ) }}"></script>
             <script src="{{ asset( 'bundles/kmsfroalaeditor/froala_editor_2.8.1/js/plugins/image.min.js' ) }}"></script>
             <script src="{{ asset( 'bundles/kmsfroalaeditor/froala_editor_2.8.1/js/plugins/image_manager.min.js' ) }}"></script>
+            <script src="{{ asset( 'bundles/quill/dist/quill.js' ) }}"></script>
             <script src="{{ asset( 'assets/vendor/lightgallery/src/js/lightgallery.js' ) }}"></script>
             <script src="{{ asset( 'assets/vendor/lightgallery/modules/lg-thumbnail.js' ) }}"></script>
             <script src="{{ asset( 'assets/vendor/lightgallery/modules/lg-fullscreen.js' ) }}"></script>

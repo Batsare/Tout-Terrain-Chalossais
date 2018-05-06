@@ -34,7 +34,7 @@ class Photo
     private $alt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Gallery",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Gallery",cascade={"persist"}, inversedBy="photos" )
      * @ORM\JoinColumn(nullable=false)
      */
     private $gallery;

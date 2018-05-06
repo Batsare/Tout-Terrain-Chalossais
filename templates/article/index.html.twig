@@ -6,14 +6,17 @@
         <div class="row justify-content-start offset-1 ">
             <div class="h1 rounded bg-success text-white pl-2 pr-2">Liste d'article</div>
         </div>
-        <div class="row justify-content-end pr-5">
-            <p>
-                <a href="{{ path('article_add') }}" class="btn btn-outline-success">
-                    <i class="glyphicon glyphicon-chevron-left"></i>
-                    Ajouter un article
-                </a>
-            </p>
-        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="row justify-content-end pr-5">
+                <p>
+                    <a href="{{ path('article_add') }}" class="btn btn-outline-success">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        Ajouter un article
+                    </a>
+                </p>
+            </div>
+        {% endif %}
+
     {% for article in postsNews %}
         <div class="pb-md-4">
             <div class="row">

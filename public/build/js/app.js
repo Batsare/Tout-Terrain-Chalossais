@@ -27,6 +27,7 @@ $(document).ready(function () {
         $("#lightgalleryArticle").lightGallery({
             selector:'this'
         });
+
         // var image = $(this).attr('src');
         // $('#myModal').css("display", "block");
         // $(".img-responsive").attr("src", image);
