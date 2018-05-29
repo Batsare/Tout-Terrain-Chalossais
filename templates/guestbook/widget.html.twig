@@ -1,0 +1,20 @@
+
+{% for message in messages %}
+    {#<div  class="card post_guestbook">#}
+        {#<div class="card-body">#}
+            {#<div  class="font-weight-bold auhtor_guestbook"> {{ message.author }}</div>#}
+            {#<div  class="content_guestbook"> {{ message.content | raw | striptags("img")}}</div>#}
+            {#<div  class="border-top date_guestbook"> {{ message.postedAt|date("d/m/Y H:i:s") }}</div>#}
+        {#</div>#}
+    {#</div>#}
+
+    <div class="card post_guestbook">
+        <div class="card-body">
+            <div class="auhtor_guestbook" >
+                <a href="{{ path('guestbook') }}" class="font-weight-bold text-danger">{{ message.author }}</a>
+            </div>
+            <div class="content_guestbook"><p> {{ message.content | striptags("<p>") | raw }}</p></div>
+            <div  class="border-top date_guestbook"><p> {{ message.postedAt|date("d/m/Y H:i:s") }}</p></div>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block titre_page %}Ajout d'un article{% endblock %}
+
+{% block container %}
+
+<div class="row justify-content-md-center">
+
+    {{ include("article/form.html.twig") }}
+
+    <p>
+        Attention : cette annonce sera ajoutée directement
+        sur la page d'accueil après validation du formulaire.
+    </p>
+</div>
+{% endblock %}

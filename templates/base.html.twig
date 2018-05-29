@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>Tout Terrain Chalossais</title>
+        <meta name="description" content="Le site des Tout Terrain Chalossais pour les amateurs de VTT QUADS CROSS-CAR de Gaujacq. Les TTC veulent faire découvrir les sentiers de chalosse a tous les amoureux du tout terrain." />
+        <meta name="keywords" content="TTC, ttc, tout terrain chalossais, Tout Terrain Chalossais, tout-terrain-chalossais, VTT, vtt, rando vtt, Rando VTT, Rando Gaujacq, Gaujacq, VTT Landes, VTT Chalosse, Fêtes de Gaujacq, fêtes de gaujacq" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% block stylesheets %}
+
+
+            <link rel="stylesheet" href={{ asset("build/css/bootstrap.min.css") }}>
+            <link rel="stylesheet" href={{ asset("assets/vendor/lightgallery/src/css/lightgallery.css") }}>
+            <link rel="stylesheet" href={{ asset("bundles/kmsfroalaeditor/froala_editor_2.8.1/css/froala_style.min.css") }}>
+            <link rel="stylesheet" href={{ asset('bundles/summernote/summernote-bs4.css') }}>
+            <link rel="stylesheet" href={{ asset("build/css/app.css") }}>
+        {% endblock %}
+
+        <LINK REL="SHORTCUT ICON" href="{{ asset("build/img/favicon.ico") }}">
+        <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+
+    </head>
+    <body class="container">
+        {% block body %}
+            <header>
+                <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                    <a class="navbar-brand" href="#">Tout Terrain Chalossais</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <li class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="nav navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('home') }}">Accueil <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('article_home') }}">Articles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('guestbook') }}">Bla Bla</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('gallery_home') }}">Albums</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('contact') }}">Contact</a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if is_granted("ROLE_BUREAU") %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('guestbook_private') }}">Bla Bla Privé</a>
+                            </li>
+                            {% endif %}
+                            {% if is_granted("ROLE_ADMIN") %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin') }}">Administration</a>
+                            </li>
+                            {% endif %}
+                            <li class="nav-item dropdown ml-auto">
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{ app.user.username }}
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                                    </div>
+                                {% else %}
+                                    <a class="nav-link" href="{{ path('fos_user_security_login') }}"   >
+                                        {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                {% block header %}
+
+                {% endblock %}
+            </header>
+
+            <main class="container-ttc rounded-top">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12 ">
+                        <h2 class="rounded-right bg-success text-white text-center">{% block titre_page %}{% endblock %}</h2>
+                    </div>
+                </div>
+                {% block container %}
+
+                {% endblock %}
+            </main>
+        {% endblock %}
+        {% block javascripts %}
+            <script src={{ asset("build/js/popper.js") }} ></script>
+            <script src={{ asset("build/js/jquery-3.3.1.min.js") }} ></script>
+            <script src="{{ asset( 'bundles/kmsfroalaeditor/froala_editor_2.8.1/js/froala_editor.min.js' ) }}"></script>
+            <script src="{{ asset( 'bundles/kmsfroalaeditor/froala_editor_2.8.1/js/plugins/image.min.js' ) }}"></script>
+            <script src="{{ asset( 'bundles/kmsfroalaeditor/froala_editor_2.8.1/js/plugins/image_manager.min.js' ) }}"></script>
+            <script src="{{ asset( 'assets/vendor/lightgallery/src/js/lightgallery.js' ) }}"></script>
+            <script src="{{ asset( 'assets/vendor/lightgallery/modules/lg-thumbnail.js' ) }}"></script>
+            <script src="{{ asset( 'assets/vendor/lightgallery/modules/lg-fullscreen.js' ) }}"></script>
+            <script src={{ asset('bundles/summernote/summernote-bs4.js') }}></script>
+            <script src={{ asset("build/js/bootstrap.min.js") }} ></script>
+
+            <script src={{ asset("build/js/app.js") }} ></script>
+
+        {% endblock %}
+    </body>
+
+</html>

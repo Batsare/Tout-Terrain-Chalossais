@@ -1,0 +1,10 @@
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: App\Entity\User
+    from_email:
+        address: foo@example.fr
+        sender_name: bar@example.fr
+    registration:
+           form:
+               type: App\Type\RegistrationType

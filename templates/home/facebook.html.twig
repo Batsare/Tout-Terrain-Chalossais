@@ -1,0 +1,16 @@
+
+{% set break = false %}
+{% for facebook in fb if not break %}
+    {% if facebook.message is defined %}
+        <div class="card post_guestbook">
+            <div class="card-body">
+                <div class="auhtor_guestbook" >
+                    <a href="https://www.facebook.com/TTC-Gaujacq-1537019533006788/" class="font-weight-bold text-danger">TTC Gaujacq</a>
+                </div>
+                <div class="content_guestbook"><p> {{ facebook.message }}</p></div>
+                <div  class="border-top date_guestbook"><p> {{ facebook.created_time|date("d/m/Y H:i:s") }}</p></div>
+            </div>
+        </div>
+        {% set break = true %}
+    {% endif %}
+{% endfor %}

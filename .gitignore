@@ -5,3 +5,11 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+public_html/\.well-known/
+
+public_html/assets/
+
+public_html/bundles/
+
+public_html/uploads/

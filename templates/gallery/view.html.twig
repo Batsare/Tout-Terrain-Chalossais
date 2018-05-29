@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{%  block container %}
+
+
+
+    {#<div id="lightgallery">#}
+        {#{% for photo in photos %}#}
+
+                {#<a href="{{ photo.webPath }}">#}
+                    {#<img src="{{ photo.webThumbPath }}" class="img-thumbnail col-lg-2" alt="{{ photo.alt }}"/>#}
+                {#</a>#}
+
+        {#{% endfor %}#}
+    {#</div>#}
+
+    <div class="row justify-content-end">
+        <div class="col-xl-5">
+            <p>
+                <a href="{{ path('gallery_home') }}" class="btn btn-outline-success">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                    Retour à la liste
+                </a>
+                {#<a href="{{ path('gallery_edit', {'id': gallery.id}) }}" class="btn btn-outline-success">#}
+                    {#<i class="glyphicon glyphicon-edit"></i>#}
+                    {#Modifier l'article#}
+                {#</a>#}
+                <a href="{{ path('gallery_delete', {'id': gallery.id}) }}" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    Supprimer l'album
+                </a>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <p class="h2 text-success">{{ gallery.name }}</p>
+            <hr>
+        </div>
+    </div>
+    <div   class="row justify-content-md-start offset-1">
+        <div id="lightgallery">
+            {% for photo in photos %}
+
+                <a href="{{ photo.webPath }}">
+                    <img src="{{ photo.webThumbPath }}" class="img-thumbnail col-lg-2" alt="{{ photo.alt }}"/>
+                </a>
+
+            {% endfor %}
+        </div>
+    </div>
+
+
+    {#<div class="row justify-content-end">#}
+        {#<div class="col-xl-5">#}
+            {#<p>#}
+                {#<a href="{{ path('gallery_home') }}" class="btn btn-outline-success">#}
+                    {#<i class="glyphicon glyphicon-chevron-left"></i>#}
+                    {#Retour à la liste#}
+                {#</a>#}
+                {#<a href="{{ path('gallery_edit', {'id': gallery.id}) }}" class="btn btn-outline-success">#}
+                {#<i class="glyphicon glyphicon-edit"></i>#}
+                {#Modifier l'article#}
+                {#</a>#}
+                {#<a href="{{ path('gallery_delete', {'id': gallery.id}) }}" class="btn btn-danger">#}
+                    {#<i class="glyphicon glyphicon-trash"></i>#}
+                    {#Supprimer l'album#}
+                {#</a>#}
+            {#</p>#}
+        {#</div>#}
+    {#</div>#}
+
+
+{%  endblock %}
