@@ -24,11 +24,9 @@ class GuestbookType extends AbstractType
 
         $builder
             ->add('author', TextType::class)
-            ->add('content', FroalaEditorType::class, array(
-                "language" => "fr",
-                "tableColors" => [ "#FFFFFF", "#FF0000" ],
-                "saveParams" => [ "id" => "myEditorField" ],
-            ))
+            ->add('content', TextareaType::class, array(
+                'attr' => array('class' => 'summernote'),
+                ))
             ->add('save', SubmitType::class, array('label' => 'Envoyer'))
         ;
     }

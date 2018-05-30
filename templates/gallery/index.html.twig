@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% block titre_page %}Albums photos{% endblock %}
 
 {% block container %}
 <div class="row">
@@ -13,19 +14,11 @@
                 </p>
             </div>
         {% endif %}
-        <div class="row">
-            {#<div class="h1 rounded bg-success text-white pl-2 pr-2">Album photos</div>#}
-            <div class="col-12 col-md-6">
-                <div class="rounded-right bg-success text-white pr-2">
-                    <p class="h1 text-right">Album photos</p>
-                </div>
-            </div>
-        </div>
         <div class="row justify-content-center">
             {#<p>{{ gallery.createdAt|date("d/m/Y") }} - </p>#}
             {% for gallery in galleries %}
 
-                <div class="col-12 text-center m-2"><a class=" h4 text-success" href="{{ path('gallery_view', { 'id' : gallery.id } ) }}">{{ gallery.createdAt|date("F Y") }} - {{ gallery.name }}</a></div>
+                <div class="col-12 text-center m-2"><a class=" h4 text-success" href="{{ path('gallery_view', { 'id' : gallery.id } ) }}">{{ gallery.name }}</a></div>
 
             {% endfor %}
         </div>

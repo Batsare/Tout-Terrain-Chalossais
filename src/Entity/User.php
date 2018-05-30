@@ -1,163 +1,72 @@
 <?php
+// src/AppBundle/Entity/User.php
+
 namespace App\Entity;
 
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 
 /**
-* @ORM\Entity(repositoryClass="App\Repository\UserRepository")
-* @ORM\Table(name="user")
-*/
-class User implements UserInterface, \Serializable
+ * @ORM\Entity
+ * @ORM\Table(name="fos_user")
+ */
+class User extends BaseUser
 {
-/**
-* @var int
-*
-* @ORM\Id
-* @ORM\GeneratedValue
-* @ORM\Column(type="integer")
-*/
-private $id;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
 
-/**
-* @var string
-*
-* @ORM\Column(type="string")
-*/
-private $fullName;
+    /**
+    * @ORM\Column(type="string")
+    */
+    protected $first_name;
 
-/**
-* @var string
-*
-* @ORM\Column(type="string", unique=true)
-*/
-private $username;
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $last_name;
 
-/**
-* @var string
-*
-* @ORM\Column(type="string", unique=true)
-*/
-private $email;
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
 
-/**
-* @var string
-*
-* @ORM\Column(type="string")
-*/
-private $password;
+    /**
+     * @return mixed
+     */
+    public function getFirstName()
+    {
+        return $this->first_name;
+    }
 
-/**
-* @var array
-*
-* @ORM\Column(type="json")
-*/
-private $roles = [];
+    /**
+     * @param mixed $first_name
+     */
+    public function setFirstName($first_name): void
+    {
+        $this->first_name = $first_name;
+    }
 
-public function getId(): int
-{
-return $this->id;
-}
+    /**
+     * @return mixed
+     */
+    public function getLastName()
+    {
+        return $this->last_name;
+    }
 
-public function setFullName(string $fullName): void
-{
-$this->fullName = $fullName;
-}
+    /**
+     * @param mixed $last_name
+     */
+    public function setLastName($last_name): void
+    {
+        $this->last_name = $last_name;
+    }
 
-public function getFullName(): string
-{
-return $this->fullName;
-}
-
-public function getUsername(): string
-{
-return $this->username;
-}
-
-public function setUsername(string $username): void
-{
-$this->username = $username;
-}
-
-public function getEmail(): string
-{
-return $this->email;
-}
-
-public function setEmail(string $email): void
-{
-$this->email = $email;
-}
-
-public function getPassword(): string
-{
-return $this->password;
-}
-
-public function setPassword(string $password): void
-{
-$this->password = $password;
-}
-
-/**
-* Retourne les rôles de l'user
-*/
-public function getRoles(): array
-{
-$roles = $this->roles;
-
-// Afin d'être sûr qu'un user a toujours au moins 1 rôle
-if (empty($roles)) {
-$roles[] = 'ROLE_USER';
-}
-
-return array_unique($roles);
-}
-
-public function setRoles(array $roles): void
-{
-$this->roles = $roles;
-}
-
-/**
-* Retour le salt qui a servi à coder le mot de passe
-*
-* {@inheritdoc}
-*/
-public function getSalt(): ?string
-{
-// See "Do you need to use a Salt?" at https://symfony.com/doc/current/cookbook/security/entity_provider.html
-// we're using bcrypt in security.yml to encode the password, so
-// the salt value is built-in and you don't have to generate one
-
-return null;
-}
-
-/**
-* Removes sensitive data from the user.
-*
-* {@inheritdoc}
-*/
-public function eraseCredentials(): void
-{
-// Nous n'avons pas besoin de cette methode car nous n'utilions pas de plainPassword
-// Mais elle est obligatoire car comprise dans l'interface UserInterface
-// $this->plainPassword = null;
-}
-
-/**
-* {@inheritdoc}
-*/
-public function serialize(): string
-{
-return serialize([$this->id, $this->username, $this->password]);
-}
-
-/**
-* {@inheritdoc}
-*/
-public function unserialize($serialized): void
-{
-[$this->id, $this->username, $this->password] = unserialize($serialized, ['allowed_classes' => false]);
-}
 }

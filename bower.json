@@ -8,7 +8,7 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "public/assets/vendor",
+    "public_html/assets/vendor",
     "test",
     "tests"
   ],

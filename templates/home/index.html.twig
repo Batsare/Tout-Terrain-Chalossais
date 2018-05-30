@@ -3,43 +3,60 @@
 {% block container %}
 
 
-    <div class="row justify-content-center">
-        <div class="col-xl-5">
-            <div class="row justify-content-start ">
-                <div class="h2 rounded bg-success text-white ml-3 pl-2 pr-2">Bla Bla récent</div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 col-sm-6 col-12 ">
+                    <h2 class="rounded-right bg-success text-white text-center">Article récent</h2>
+                </div>
             </div>
-            {{ render(controller("App\\Controller\\GuestbookController:widgetAction", {'limit': 2})) }}
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-11">
+                    {{ render(controller("App\\Controller\\ArticleController:homeAction", {'limit': 1})) }}
+                </div>
+            </div>
         </div>
-        <div class="col-xl-5">
-            <div class="row justify-content-start ">
-                <div class="h2 rounded bg-success text-white ml-3 pl-2 pr-2">Facebook</div>
+
+        <div class="col-12 col-md-6 ">
+            <div class="row justify-content-end">
+                <div class="col-lg-8 col-md-10 col-sm-6 col-12  ">
+                    <h2 class="rounded-left bg-success  text-white text-center">Bla Bla récent</h2>
+                </div>
             </div>
-            {{ render(controller("App\\Controller\\HomeController:facebookAction")) }}
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-11">
+                    {{ render(controller("App\\Controller\\GuestbookController:widgetAction", {'limit': 2})) }}
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row justify-content-center mt-5">
-        <div class="col-xl-5">
-            <div class="row justify-content-start ">
-                <div class="h2 rounded bg-success text-white ml-3 pl-2 pr-2">Articles récents</div>
+    <div class="row mt-5">
+        <div class="col-12 col-md-6">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 col-sm-6 col-12 ">
+                    <h2 class="rounded-right bg-success text-white text-center">Facebook</h2>
+                </div>
             </div>
-            {{ render(controller("App\\Controller\\ArticleController:homeAction", {'limit': 1})) }}
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-11">
+                    {{ render(controller("App\\Controller\\HomeController:facebookAction")) }}
+                </div>
+            </div>
         </div>
-        <div class="col-xl-5">
-            <div class="row justify-content-start ">
-                <div class="h2 rounded bg-success text-white ml-3 pl-2 pr-2">Albums récents</div>
+
+        <div class="col-12 col-md-6 ">
+            <div class="row justify-content-end">
+                <div class="col-lg-8 col-md-10 col-sm-6 col-12  ">
+                    <h2 class="rounded-left bg-success text-white text-center">Albums photos</h2>
+                </div>
             </div>
-            {{ render(controller("App\\Controller\\GalleryController:widgetAction", {'limit': 4})) }}
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-11">
+                    {{ render(controller("App\\Controller\\GalleryController:widgetAction", {'limit': 4})) }}
+                </div>
+            </div>
         </div>
     </div>
-
-    {#<div class="row justify-content-start offset-xl-1 ">#}
-        {#<div class="h2 rounded bg-success text-white pl-2 pr-2">Articles récents</div>#}
-    {#</div>#}
-    {#<div class="row justify-content-center">#}
-        {#<div class="col-xl-5">#}
-            {#{{ render(controller("App\\Controller\\ArticleController:homeAction", {'limit': 1})) }}#}
-        {#</div>#}
-        {#<div class="col-xl-5"></div>#}
-    {#</div>#}
+   
 {%  endblock %}

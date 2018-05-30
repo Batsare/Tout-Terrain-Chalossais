@@ -17,7 +17,7 @@ Class HomeController extends Controller
     public function facebookAction(){
         $fb = new Facebook([
             'app_id' => '2116714391894730',
-            'app_secret' => '4b39e425935d9aa10ca82b63110b01d1',
+            'app_secret' => '2116714391894730|7ilE0SD5Zp2-kxovKng8HR0ypNc',
             'default_graph_version' => 'v2.10',
             //'default_access_token' => '{access-token}', // optional
         ]);
@@ -27,7 +27,7 @@ Class HomeController extends Controller
         try {
             // Returns a `Facebook\FacebookResponse` object
             $response = $fb->get(
-                '/cadetsdechalosse/posts',
+                '/1537019533006788/posts',
                 '2116714391894730|7ilE0SD5Zp2-kxovKng8HR0ypNc'
             );
         } catch(FacebookResponseException $e) {

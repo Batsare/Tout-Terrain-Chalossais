@@ -152,19 +152,19 @@ class Photo
     public function getUploadDir()
     {
         // On retourne le chemin relatif vers l'image pour un navigateur (relatif au répertoire /web donc)
-        return '/uploads/img/galleries/'.$this->getGallery()->getName();
+        return 'uploads/img/galleries/'.$this->getGallery()->getName();
     }
 
     protected function getUploadRootDir()
     {
         // On retourne le chemin relatif vers l'image pour notre code PHP
-        return __DIR__.'/../../public/'.$this->getUploadDir().'/large/';
+        return __DIR__.'/../../public_html/'.$this->getUploadDir().'/large/';
     }
 
     protected function getUploadSmallDir()
     {
         // On retourne le chemin relatif vers l'image pour notre code PHP
-        return __DIR__.'/../../public/'.$this->getUploadDir().'/small/';
+        return __DIR__.'/../../public_html/'.$this->getUploadDir().'/small/';
     }
 
     public function getWebPath()

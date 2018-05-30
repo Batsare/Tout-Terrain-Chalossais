@@ -2,7 +2,7 @@
     {#<p>{{ gallery.createdAt|date("d/m/Y") }} - </p>#}
     {% for album in albums %}
 
-        <div class="col-12 text-center m-2"><a class=" h4 text-success" href="{{ path('gallery_view', { 'id' : album.id } ) }}">{{ album.createdAt|date("F Y") }} - {{ album.name }}</a></div>
+        <div class="col-12 text-center m-2"><a class=" h4 text-success" href="{{ path('gallery_view', { 'id' : album.id } ) }}">{{ album.name }}</a></div>
 
     {% endfor %}
 </div>

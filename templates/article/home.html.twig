@@ -1,14 +1,17 @@
 {% for article in articles %}
+    <div class="row">
+        <div class="col-12">
+            <p class="h2"><a class="text-dark" href="{{ path('article_view', {'id': article.id}) }}">{{ article.title }}</a></p>
+
+        </div>
+    </div>
         <div class="row justify-content-md-start">
             <div class="col-12">
-                <div class="thumbnail ">
-                    <img src="{{ article.image.webPath }}" alt="" class="img-thumbnail img-fluid">
-                    <div class="caption col-8 pl-0">
-                        <div class="rounded-right bg-success pl-2">
-                            <p class="h3"><a class="text-dark align-text-top" href="{{ path('article_view', {'id': article.id}) }}">{{ article.title }}</a></p>
-                        </div>
-                    </div>
-                </div>
+                <img src="{{ article.image.webPath }}" alt="" class=" img-fluid col-12 col-md-6 float-left mr-1">
+                <p>
+                    {{ article.content | striptags("img") | slice(0, 500) | raw }}... <a href="{{ path('article_view', {'id': article.id}) }} " class="text-success">Lire plus</a>
+                </p>
+
             </div>
         </div>
 
@@ -18,13 +21,13 @@
                 {#<hr>#}
             {#</div>#}
         {#</div>#}
-        <div class="row justify-content-md-start">
+        {#<div class="row justify-content-md-start">#}
             {#<div class="col-md-10">#}
                 {#<img src="{{ article.image.webPath }}" class="img-thumbnail img-fluid" alt="">#}
             {#</div>#}
-            <div class="col-md-12 ">
-                <p>{{ article.content | raw | striptags("img") | slice(0, 500) }}... <a href="{{ path('article_view', {'id': article.id}) }}">Lire plus</a></p>
-            </div>
-        </div>
+            {#<div class="col-md-12 ">#}
+                {#<p>{{ article.content | raw | striptags("img") | slice(0, 500) }}... <a href="{{ path('article_view', {'id': article.id}) }}">Lire plus</a></p>#}
+            {#</div>#}
+        {#</div>#}
 
 {% endfor %}

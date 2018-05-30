@@ -34,14 +34,14 @@ class Article
      * @var string
      *
      * Et pour être logique, il faudrait aussi mettre la colonne titre en Unique pour Doctrine :
-     * @ORM\Column(name="title", type="string", length=255, unique=true)
+     * @ORM\Column(name="title", type="string", length=180, unique=true)
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="author", type="string", length=255)
+     * @ORM\Column(name="author", type="string", length=180)
      * @Assert\Length(min=2)
      */
     private $author;

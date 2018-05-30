@@ -3,5 +3,15 @@ easy_admin:
        # List the entity class name you want to manage
         - App\Entity\Article
         - App\Entity\Guestbook
+        - App\Entity\GuestbookPrivate
         - App\Entity\Gallery
         - App\Entity\User
+
+    design:
+            menu:
+                - { entity: 'Article', label: 'Article' }
+                - { entity: 'Guestbook', label: 'Bla Bla' }
+                - { entity: 'GuestbookPrivate', label: 'Bla Bla Privé' }
+                - { entity: 'Gallery', label: 'Album photo' }
+                - { entity: 'User', label: 'Utilisateur' }
+                - { label: 'Retour au site', route: 'home' }

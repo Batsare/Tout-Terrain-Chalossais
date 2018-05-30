@@ -14,3 +14,26 @@
 public/uploads/
 
 \.env
+
+.directory
+/var/
+/vendor/
+public_html/\.well-known/
+
+public_html/assets/
+
+public_html/bundles/
+
+public_html/uploads/
+
+public_html/\.htaccess
+
+public_html/\.user\.ini
+
+*.ini
+
+public_html/robots\.txt
+
+public_html/googlefe4b4e73de19555b\.html
+
+public_html/sitemap\.xml

@@ -83,3 +83,6 @@ app_paramconverter:
     path: /test/{json}
     defaults:
       _controller: "App:article:ParamConverter"
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
